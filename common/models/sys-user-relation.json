@@ -1,0 +1,42 @@
+{
+  "name": "sysUserRelation",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "principalType": {
+      "type": "string",
+      "required": true
+    },
+    "principalId": {
+      "type": "string",
+      "required": true
+    },
+    "objectId": {
+      "type": "string",
+      "required": true
+    },
+    "created": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "sysUser": {
+      "type": "belongsTo",
+      "model": "sysUser",
+      "foreignKey": "objectId"
+    },
+    "sysGroup": {
+      "type": "belongsTo",
+      "model": "sysGroup",
+      "foreignKey": "principalId"
+    },
+    "sysPosition": {
+      "type": "belongsTo",
+      "model": "sysPosition",
+      "foreignKey": "principalId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

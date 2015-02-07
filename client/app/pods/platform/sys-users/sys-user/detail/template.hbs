@@ -1,0 +1,29 @@
+<div class="page-header">
+    <h4 class="smaller blue">
+        <button {{action "back"}} class="btn btn-xs btn-info" style="margin:0 10px 0 0;">
+            <i class="icon-mail-reply"></i>
+            返 回
+        </button>
+        <b class="middle">{{username}}</b>							</h4>
+</div>
+<div class="row">
+
+    <div class="col-sm-12 widget-container-span">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+              {{#link-to 'platform.sysUsers.sysUser.detail.profile' tagName='li'}}
+                  <a>基本信息</a>
+              {{/link-to}}
+              {{#link-to 'platform.sysUsers.sysUser.detail.roleAllocation' tagName='li'}}
+                  <a>角色分配</a>
+              {{/link-to}}
+              {{#link-to 'platform.sysUsers.sysUser.detail.organization' tagName='li'}}
+                  <a>组织信息</a>
+              {{/link-to}}
+            </ul>
+            <div class="tab-content padding-0">
+              {{outlet}}
+            </div>
+        </div>
+    </div>
+</div>

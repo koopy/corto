@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <div class="dataTables_wrapper">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div id="sample-table-2_length" class="dataTables_length">
+                          {{view "select"
+                          content=statusContent
+                          value=status
+                          optionValuePath="content.key"
+                          optionLabelPath="content.name"
+                          prompt="请选择状态"
+                          }}
+                          {{input placeholder="搜索..." action="enter"}}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="dataTables_filter" id="sample-table-2_filter">
+                            <button class="btn btn-white" {{action "create"}} data-toggle="modal" data-target="#myModal"><i class="icon-plus-sign purple align-top bigger-125"></i> 新建</button>
+                            <button class="btn btn-white" {{action "delBatch" 'modal'}}><i class="icon-trash red align-top bigger-125"></i> 批量删除</button>
+                        </div>
+                    </div>
+                </div>
+              {{ember-table
+              hasFooter=false
+              enableContentSelection=true
+              selectionMode="multiple"
+              columns=columns
+              content=content
+              persistedSelection=controller.selection
+              }}
+              {{page-numbers content=content}}
+            </div>
+        </div>
+    </div>
+</div>

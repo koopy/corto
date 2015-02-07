@@ -1,0 +1,47 @@
+<div class='page-header'>
+    <h4 class='smaller blue'>
+        <button {{action 'back'}} class='btn btn-xs btn-info' style='margin:0 10px 0 0;'>
+            <i class='icon-mail-reply'></i>
+            返 回
+        </button>
+        <b class='middle'>修改信息</b>							</h4>
+</div>
+<div class='row'>
+
+    <div class='col-sm-12'>
+        <div class='user-profile row'>
+            <div class='col-sm-offset-1 col-sm-10'>
+              {{#form-for model wrapper="bootstrap"}}
+                  <div class='tabbable'>
+                      <div class='tab-content profile-edit-tab-content'>
+
+                          <div id='edit-password' class='tab-pane in active'>
+                              <div class='space-10'></div>
+                              <% modelFormOptions.forEach(function(item){ %>
+                            {{input <%=item.field%> label='<%=item.label%>' as='<%=item.type%>'}}
+                              <% }); %>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class='clearfix form-actions'>
+                      <div class='col-md-offset-6 col-md-3'>
+                          <button {{action "back"}} class='btn' type='reset'>
+                              <i class='icon-undo bigger-110'></i>
+                              取消											</button>
+
+                          <!--<button class='btn btn-info' type='button' style='margin-left:10px;'>-->
+                          <!--<i class='icon-ok bigger-110'></i>-->
+                          <!--确定											</button>-->
+                        {{#submit '确定' class='btn btn-primary'}}
+                            <i class='icon-ok bigger-110'></i>
+                            确定
+                        {{/submit}}
+                          &nbsp; &nbsp;
+                      </div>
+                  </div>
+              {{/form-for}}
+            </div>
+        </div>
+    </div>
+</div>

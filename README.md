@@ -1,4 +1,2 @@
-corto
-=====
-
-Based Model for exporer
+1.TCP Duplex half full ?
+2.Git continue;

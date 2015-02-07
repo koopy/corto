@@ -1,0 +1,28 @@
+{
+  "name": "sysUser",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "sysGroups": {
+      "type": "hasMany",
+      "model": "sysGroup",
+      "foreignKey": "sysGroupId",
+      "through": "sysUserRelation"
+    },
+    "sysPosition": {
+      "type": "hasMany",
+      "model": "sysPosition",
+      "foreignKey": "sysPositionId",
+      "through": "sysUserRelation"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

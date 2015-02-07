@@ -1,5 +1,6 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var Container = require('./container');
 
 var app = module.exports = loopback();
 
@@ -9,6 +10,8 @@ app.use(loopback.favicon());
 // request pre-processing middleware
 app.use(loopback.compress());
 
+app.set('container', new Container());
+app.set('aclErrorStatus', 403);
 // -- Add your pre-processing middleware here --
 
 // boot scripts mount components like REST API
@@ -18,8 +21,8 @@ boot(app, __dirname);
 // All static middleware should be registered at the end, as all requests
 // passing the static middleware are hitting the file system
 // Example:
-//   var path = require('path');
-//   app.use(loopback.static(path.resolve(__dirname, '../client')));
+var path = require('path');
+app.use(loopback.static(path.resolve(__dirname, '../client/dist')));
 
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error

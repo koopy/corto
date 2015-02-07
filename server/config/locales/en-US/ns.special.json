@@ -1,0 +1,27 @@
+{
+  "hello": ", hello !",
+  "click": "If the button is not clicked, click the link below to enter",
+  "note": "note : for the sake of safety, operational links expire in 24 hours in the transmission of.",
+  "feedback": "If you have any questions or suggestions in use, welcome the feedback to our mailbox:",
+  "verify": {
+    "subject": "E-mail verification",
+    "thanks": "Thank you for registering!",
+    "confirm": "You are one step can full use of INNO-DE. Click the button below to confirm your email address."
+  },
+  "reset" : {
+    "subject" : "Reset password",
+    "reset" : "Please click the button below to reset your password"
+  },
+  "invite" : {
+    "subject" : "Join teamwork",
+    "confirm" : "If you agree to invite into the project, please click the button below to confirm",
+    "agree" : "Agreed to invite"
+  },
+
+  "message" : {
+    "invite" : "Invite user",
+    "join" : "to join the project",
+    "remove" : "Removed from the project"
+  }
+
+}

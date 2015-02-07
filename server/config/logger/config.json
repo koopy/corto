@@ -1,0 +1,22 @@
+{
+  "app": {
+    "fileName": "loopback",
+    "debugLevel": ["error", "debug"],
+    "level": "info",
+    "errorLevel": "error"
+  },
+  "connect": {
+    "fileName": "connect",
+    "meta": true,
+    "msg": "",
+    "statusLevels": false,
+    "eachLevel": false
+  },
+  "global": {
+    "dirName": "tmp/log",
+    "segmentPattern": "yyyy/yyyy-MM/yyyy-MM-dd",
+    "datePattern": "-yyyy-MM-dd.log",
+    "maxSize": 10485760,
+    "jsonFormat": false
+  }
+}

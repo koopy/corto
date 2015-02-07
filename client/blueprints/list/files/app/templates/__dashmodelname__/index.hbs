@@ -1,0 +1,26 @@
+<div class="page-header">
+    <h4 class="smaller blue">
+        <button {{action "back"}} class="btn btn-xs btn-info" style="margin:0 10px 0 0;">
+            <i class="icon-mail-reply"></i>
+            返 回
+        </button>
+        <b class="middle">{{<%=configOptions.identity.field%>}}</b>							</h4>
+</div>
+<div class="row">
+
+<div class="col-sm-12 widget-container-span">
+<div class="tabbable">
+<ul class="nav nav-tabs" id="myTab">
+    <% for(var attr in configOptions.detail){ %>
+    <% var cur = configOptions.detail[attr];%>
+      <li>
+          {{#link-to '<%=attr%>'}}<%=cur.name%>{{/link-to}}
+      </li>
+    <% }; %>
+</ul>
+<div class="tab-content padding-0">
+    {{outlet}}
+</div>
+</div>
+</div>
+</div>

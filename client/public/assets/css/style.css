@@ -1,0 +1,115 @@
+.profile-user-info-striped .width-120{
+	width:120px;
+}
+.widget-main.padding-0 .tab-1 td:first-child{
+	border-left-width:1px;
+}
+.add-padding-0 .profile-info-value{
+	padding:1px 4px 1px 12px;
+}
+.add-padding-0 .add-padding-6{
+	padding:6px 4px 6px 12px;
+}
+.list-box .message-item{
+	background:#f9f9f9;
+}
+.list-box .message-item:hover{
+	background:#f2f6f9;
+}
+.list-box .message-item .sender{
+	color:#478fca;
+	width:155px;
+}
+.list-box .message-navbar{
+	border-left:1px solid #eaedf1;
+	border-right:1px solid #eaedf1;
+}
+.list-box .select{
+	border-left:3px solid #2b7dbc;
+	background:#ffffff;
+}
+.tab-th tr:first-child,.add-tab-th tr:first-child{
+	background:#f9f9f9;
+}
+.top,.top input[type="checkbox"]{
+	margin:0px;
+}
+.top .lbl{
+	vertical-align:top;
+}
+.top input.ace[type="checkbox"] + .lbl:before,.top input.ace[type="radio"] + .lbl:before{
+	vertical-align:top;
+}
+.border-none:before{
+	border-style:none;
+}
+select.font-padding option{
+	font-size:13px;
+	padding:6px 4px;
+}
+.table thead tr,.table-responsive .table thead tr{
+	background:#ffffff;
+}
+.btn-hidden{
+	visibility:hidden;
+	position:absolute;
+	bottom:15px;
+	right:15px;
+}
+.message-item:hover .btn-hidden{
+	visibility:visible;
+}
+.widget-main table thead tr{
+	background:#ffffff;
+}
+.tab-th > tbody > tr:nth-child(2n+1) > td:first-child,.tab-th > tbody > tr:nth-child(2n) > td:first-child{
+	background:#f9f9f9;
+	color:#707070;
+	font-weight:bold;
+	border-right-width:2px;
+}
+.tab-th thead tr th{
+	text-align:center;
+	background:#f9f9f9;
+}
+.tab-th > tbody > tr:nth-child(2n+1) > td{
+	background:#ffffff;
+}
+button.btn-group:active,button.btn-group{
+	top:0px;
+	right:34px;
+	left:auto;
+}
+.add-search-btn{
+	border: 1px solid #6fb3e0;
+	border-radius: 100% !important;
+	height: 28px !important;
+	z-index: 11;
+	width: 28px !important;
+	background:#ffffff;
+	display:inline-block;
+	transition: font-size  0.15s ease 0s;
+}
+.add-search-btn .nav-search-icon {
+	color: #6fb3e0 !important;
+	font-size: 14px !important;
+	line-height: 24px !important;
+}
+.nav-search-icon {
+	border: 0 none;
+	border-radius: 0;
+	padding: 0 3px !important;
+}
+.add-search-btn:hover{
+	font-size:15px;
+}
+.add-bg-color{
+	background:#eff3f8; 
+	border-top:1px solid #dddddd;
+}
+.dataTables_wrapper .add-bg-color .border-0{
+	border:none;
+}
+.add-border-bottom{
+	border-bottom:1px solid #eaedf1;
+}

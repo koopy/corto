@@ -1,0 +1,10 @@
+{
+  "restApiRoot": "/api",
+  "port": 3000,
+  "url": "http://127.0.0.1:3000/",
+  "cookieSecret": "http://www.innoarch.com/teamwork",
+  "lang": "zh-CN",
+  "distPath": "../client/dist",
+  "redisHost": "121.199.33.9",
+  "redisPort": 6379
+}

@@ -6,10 +6,17 @@
     "pretest": "jshint ."
   },
   "dependencies": {
+    "async": "^0.9.0",
+    "bluebird": "^2.9.6",
     "compression": "^1.0.3",
     "errorhandler": "^1.1.1",
+    "hydro-class": "0.0.3",
+    "hydro-mixin": "0.0.3",
+    "inflection": "^1.5.3",
+    "lodash": "^3.1.0",
     "loopback": "^2.5.0",
     "loopback-boot": "^2.2.0",
+    "loopback-connector-mysql": "^1.5.1",
     "loopback-datasource-juggler": "^2.7.0",
     "serve-favicon": "^2.0.1"
   },

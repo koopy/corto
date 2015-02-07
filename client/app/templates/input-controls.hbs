@@ -1,0 +1,9 @@
+{{input-field class="col-sm-7" propertyBinding="view.property" inputOptionsBinding="view.inputOptionsValues"}}
+{{#if view.showError}}
+    <div class="help-block col-xs-12 col-sm-5 inline">
+      {{error-field propertyBinding="view.property"}}
+    </div>
+{{/if}}
+{{#if view.hint}}
+  {{hint-field propertyBinding="view.property" textBinding="view.hint"}}
+{{/if}}

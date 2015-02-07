@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "sources": [
+      "../../../common/models",
+      "../../models"
+    ]
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "user": {
+    "dataSource": "db",
+    "public": true
+  },
+  "parent": {
+    "dataSource": "db",
+    "public": false
+  },
+  "project": {
+    "dataSource": "db",
+    "public": true
+  },
+  "user_project_star": {
+    "dataSource": "db",
+    "public": true
+  },
+  "project_member": {
+    "dataSource": "db",
+    "public": true
+  },
+  "message": {
+    "dataSource": "db",
+    "public": true
+  },
+  "group_member": {
+    "dataSource": "db",
+    "public": true
+  },
+  "project_group": {
+    "dataSource": "db",
+    "public": true
+  }
+
+}

@@ -1,6 +1,10 @@
 {
   "db": {
+    "host": "localhost",
+    "database": "corto",
+    "username": "root",
+    "password": "weiyang154",
     "name": "db",
-    "connector": "memory"
+    "connector": "mysql"
   }
 }

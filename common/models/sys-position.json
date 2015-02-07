@@ -1,0 +1,22 @@
+{
+  "name": "sysPosition",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "sysUsers": {
+      "type": "hasMany",
+      "model": "sysUser",
+      "foreignKey": "sysUserId",
+      "through": "sysUserRelation"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

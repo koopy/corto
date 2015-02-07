@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+  <script type="text/javascript" src="bower_components/moment/moment.js"></script>
+  <script type="text/javascript">
+
+    console.log(moment(new Date()).fromNow());
+    console.log(moment("20120620", "YYYYMMDD").fromNow());
+    console.log(moment().startOf('day').fromNow());
+    console.log(moment().endOf('day').fromNow());
+    console.log(moment().startOf('hour').fromNow());
+    console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
+    console.log(moment().format('dddd'));
+    console.log(moment().format("MMM Do YY"));
+    console.log(moment().format('YYYY [escaped] YYYY'));
+    console.log(moment().format());
+  </script>
+</head>
+<body>
+
+</body>
+</html>

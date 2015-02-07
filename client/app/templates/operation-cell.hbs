@@ -1,0 +1,11 @@
+<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>
+
+  {{!#current-route parentView.controller.currentPath  view.row class='green' suffix='edit'}}
+    <a class='green' href='#' {{action "edit" view.row.content target="origContext"}}>
+      <i class='icon-file-text bigger-130'></i>
+    </a>
+  {{!/current-route}}
+    <a class='red' {{action "openModal" 'confirm' view.row.content target="origContext"}}>
+        <i class='icon-trash bigger-130'></i>
+    </a>
+</div>

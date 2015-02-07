@@ -25,5 +25,29 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "sysUser": {
+    "dataSource": "db",
+    "public": true
+  },
+  "sysGroup": {
+    "dataSource": "db",
+    "public": true
+  },
+  "sysOrg": {
+    "dataSource": "db",
+    "public": true
+  },
+  "sysDepartment": {
+    "dataSource": "db",
+    "public": true
+  },
+  "sysUserRelation": {
+    "dataSource": "db",
+    "public": true
+  },
+  "sysPosition": {
+    "dataSource": "db",
+    "public": true
   }
 }
