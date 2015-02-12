@@ -1,0 +1,36 @@
+<div class="page-header">
+    <h4 class="smaller blue">
+        <button {{action "back"}} class="btn btn-xs btn-info" style="margin:0 10px 0 0;">
+            <i class="icon-mail-reply"></i>
+            返 回
+        </button>
+        <b class="middle">{{name}}</b>							</h4>
+</div>
+<div class="row">
+
+<div class="col-sm-12 widget-container-span">
+<div class="tabbable">
+<ul class="nav nav-tabs" id="myTab">
+    
+    
+      <li>
+          {{#link-to 'profile'}}基本信息{{/link-to}}
+      </li>
+    
+    
+      <li>
+          {{#link-to 'roleAllocation'}}角色分配{{/link-to}}
+      </li>
+    
+    
+      <li>
+          {{#link-to 'organization'}}组织信息{{/link-to}}
+      </li>
+    
+</ul>
+<div class="tab-content padding-0">
+    {{outlet}}
+</div>
+</div>
+</div>
+</div>

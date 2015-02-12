@@ -12,7 +12,7 @@ var PaginationFilter = BaseFilter.extend({
    * @returns {*}
    */
   checkAfter: function (ctx, previousResult) {
-    return ctx.req.param('withPage', true);
+    return ctx.req.header('pagination', false);
   },
 
   /**

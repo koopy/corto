@@ -6,17 +6,23 @@ var attr = DS.attr,
   hasMany = DS.hasMany
   ;
 var Model = Base.extend({
-  nickname: attr(),
-  password:attr(),
-  sex:attr('boolean'),
-  email:attr(),
-  phone:attr(),
-  telephone:attr(),
-  homeTel:attr(),
-  address:attr(),
-  username: attr(),
-  status: attr('boolean'),
-  modified: attr('pretty-date'),
+  orgId: attr('string'),
+  deptId: attr('string'),
+  name: attr('string'),
+  account: attr('string'),
+  password: attr('string'),
+  sex: attr('string'),
+  status: attr('string'),
+  email: attr('string'),
+  address: attr('string'),
+  officePhone: attr('string'),
+  homePhone: attr('string'),
+  mobile: attr('string'),
+  description: attr('string'),
+  created: attr('date'),
+  creator: attr('string'),
+  modified: attr('string'),
+  modifier: attr('date'),
 
   //relation definition
   userRelations:hasMany('sysUserRelation'),
@@ -37,7 +43,7 @@ Model.columns = {
   config:{
     isVisible:false,
     identity:{
-      field:"username",
+      field:"name",
       name:"用户"
     },
     detail:{
@@ -54,15 +60,15 @@ Model.columns = {
     }
   },
   checkbox:{
-    columnWidth: 50,
+    columnWidth: '10%',
     textAlign:"text-align-center",
     headerCellViewClass:'checkbox-header',
     tableCellViewClass: 'checkbox-cell'
   },
-  nickname: {
+  name: {
     headerCellName: '用户名',
-    columnWidth: 100,
-    contentPath: 'nickname',
+    columnWidth: '10%',
+    contentPath: 'name',
     formOptions: {
 
     }
@@ -76,14 +82,14 @@ Model.columns = {
       type: 'password'
     }
   },
-  username: {
+  account: {
     headerCellName: '账号',
-    columnWidth: 100,
-    contentPath: 'username'
+    columnWidth: '10%',
+    contentPath: 'account'
   },
   sex: {
     headerCellName: '性别',
-    columnWidth: 100,
+    columnWidth: '10%',
     contentPath: 'sex',
     formOptions: {
       type: 'radio'
@@ -98,19 +104,10 @@ Model.columns = {
       type: 'email'
     }
   },
-  phone: {
-    headerCellName: '手机号码',
-    columnWidth: 100,
-    contentPath: 'phone',
-    isVisible: false,
-    formOptions: {
-
-    }
-  },
-  telephone: {
+  officePhone: {
     headerCellName: '办公室电话',
     columnWidth: 100,
-    contentPath: 'telephone',
+    contentPath: 'officePhone',
     isVisible: false,
     formOptions: {
 
@@ -118,16 +115,25 @@ Model.columns = {
   },
   status: {
     headerCellName: '状态',
-    columnWidth: 100,
+    columnWidth: '10%',
     contentPath: 'status',
     formOptions: {
       type: 'radio'
     }
   },
-  homeTel: {
+  homePhone: {
     headerCellName: '家庭电话',
     columnWidth: 100,
-    contentPath: 'homeTel',
+    contentPath: 'homePhone',
+    isVisible: false,
+    formOptions: {
+
+    }
+  },
+  mobile: {
+    headerCellName: '手机',
+    columnWidth: 100,
+    contentPath: 'mobile',
     isVisible: false,
     formOptions: {
 
@@ -151,15 +157,35 @@ Model.columns = {
       type: 'textarea'
     }
   },
+  created:{
+    headerCellName: '创建时间',
+    columnWidth: '20%',
+    contentPath: 'created',
+    showInForm:false
+  } ,
+  creator:{
+    headerCellName: '创建者',
+    columnWidth: '10%',
+    contentPath: 'creator',
+    showInForm:false
+  },
+  modifier: {
+    headerCellName: '最后修改人',
+    columnWidth: 100,
+    isVisible:false,
+    contentPath: 'modifier',
+    showInForm:false
+  },
   modified: {
     headerCellName: '最后修改时间',
     columnWidth: 100,
+    isVisible:false,
     contentPath: 'modified',
     showInForm:false
   },
   operation: {
     headerCellName: '操作',
-    columnWidth: 100,
+    columnWidth: '10%',
     textAlign:"text-align-center",
     tableCellViewClass: 'operation-cell'
   }

@@ -3,9 +3,31 @@
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
     "name": {
       "type": "string",
       "required": true
+    },
+    "status": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "modifier": {
+      "type": "string"
     }
   },
   "validations": [],

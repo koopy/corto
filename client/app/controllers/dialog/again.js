@@ -8,9 +8,15 @@ import Ember from 'ember';
 
 export default
 Ember.ObjectController.extend({
-  open:function(){
+  senior:null,
+  open:function(senior){
+    this.set('senior',senior);
     console.log('again modal opend');
   }.on('open'),
   actions: {
+    ensure:function(){
+      var senior = this.get('senior');
+      senior.send('refresh');
+    }
   }
 });

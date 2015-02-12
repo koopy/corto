@@ -1,0 +1,47 @@
+{
+  "name": "sysResource",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "identity": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "parentId": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "weight": {
+      "type": "string"
+    },
+    "isShow": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "string"
+    },
+    "modifier": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

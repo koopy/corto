@@ -49,5 +49,17 @@
   "sysPosition": {
     "dataSource": "db",
     "public": true
+  },
+  "sysDict": {
+    "dataSource": "db",
+    "public": true
+  },
+  "physician": {
+    "dataSource": "db",
+    "public": true
+  },
+  "patient": {
+    "dataSource": "db",
+    "public": true
   }
 }

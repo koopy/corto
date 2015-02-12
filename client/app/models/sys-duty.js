@@ -6,8 +6,8 @@ var Model = Base.extend({
   name: attr(),
   code: attr(),
   description:attr(),
-  created:attr('pretty-date'),
-  modified: attr('pretty-date')
+  created:attr('date'),
+  modified: attr('date')
 });
 Model.columns = {
   config:{

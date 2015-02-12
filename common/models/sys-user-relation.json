@@ -17,6 +17,15 @@
     },
     "created": {
       "type": "date"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "string"
+    },
+    "modifier": {
+      "type": "date"
     }
   },
   "validations": [],

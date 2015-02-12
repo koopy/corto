@@ -3,9 +3,57 @@
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
+    "orgId": {
+      "type": "string"
+    },
+    "deptId": {
+      "type": "string"
+    },
     "name": {
       "type": "string",
       "required": true
+    },
+    "account": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "sex": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "officePhone": {
+      "type": "string"
+    },
+    "homePhone": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "string"
+    },
+    "modifier": {
+      "type": "date"
     }
   },
   "validations": [],

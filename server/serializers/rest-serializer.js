@@ -41,8 +41,14 @@ var RESTSerializer = Serializer.extend({
 
   serialize: function (modelCtor, previousResult) {
     var result = {},
-      isPlural = Array.isArray(previousResult),
-      rootName = inflection.camelize(
+      isPlural = Array.isArray(previousResult);
+    if(!_.isEmpty(previousResult)){
+      modelCtor = isPlural ? previousResult[0].constructor : previousResult.constructor;
+    }else{
+      //TODO how to know self or relation type
+    }
+
+    var rootName = inflection.camelize(
         isPlural ? modelCtor.pluralModelName : modelCtor.modelName, true)
       ;
 

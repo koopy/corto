@@ -1,0 +1,19 @@
+{
+  "name": "physician",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "patients": {
+      "type": "hasMany",
+      "model": "patient"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

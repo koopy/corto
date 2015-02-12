@@ -6,11 +6,15 @@ var attr = DS.attr,
   hasMany = DS.hasMany
   ;
 var Model=Base.extend({
-  code: attr(),
-  name: attr(),
-  description: attr(),
-  status: attr(),
-  modified: attr('pretty-date'),
+  code: attr('string'),
+  name: attr('string'),
+  dutyId: attr('string'),
+  status: attr('string'),
+  description: attr('string'),
+  created: attr('string'),
+  creator: attr('string'),
+  modified: attr('string'),
+  modifier: attr('string'),
 //relation definition
   userRelations:hasMany('sysUserRelation'),
   validations: {

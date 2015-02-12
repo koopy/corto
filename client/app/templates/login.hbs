@@ -1,0 +1,106 @@
+<div class="login-main-container">
+    <div class="login-main-content">
+        <div class="login-container">
+            <div class="logo">
+                <i class="icon-logo"></i>
+            </div>
+
+            <div class="space-6"></div>
+
+            <div class="position-relative">
+                <div id="login-box" class="login-box">
+                    <h4 class="header">
+                        <i class="icon-title"></i>
+                    </h4>
+
+                    <form>
+                        <fieldset>
+                            <label class="block clearfix position-relative">
+										<span class="block input-icon">
+											{{input class="form-control" placeholder="请输入用户名"
+                      type="text" value=identification}}
+                        <i class="fa fa-user"></i>
+										</span>
+                            </label>
+
+                            <label class="block clearfix position-relative">
+										<span class="block input-icon">
+                  {{input class="form-control" placeholder="请输入密码"
+                  type="password" value=password}}
+                        <i class="fa fa-lock"></i>
+										</span>
+                            </label>
+
+                            <div class="clearfix">
+                                <label class="inline">
+                                    <input type="checkbox" class="bmp"/>
+                                    <span class="lbl">&nbsp;&nbsp;&nbsp;记住我</span>
+                                </label>
+                                <input type="button" value="忘记密码？" class="pull-right btn btn-success"/>
+
+                            </div>
+
+                            <div class="space-8"></div>
+
+                            <div class="massage" style="color:red;">
+                                {{errorMessage}}
+                            </div>
+
+                            <div class="space-8"></div>
+
+                            <div class="clearfix div-logo">
+                                <input type="submit" value="登陆平台" {{action "login"}}
+                                       class="width-100 btn btn-primary no-radius"/>
+
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- /login-box -->
+
+            </div>
+            <!-- /position-relative -->
+        </div>
+    </div>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+
+<![endif]-->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+    function show_box(id) {
+        jQuery('.widget-box.visible').removeClass('visible');
+        jQuery('#' + id).addClass('visible');
+    }
+</script>
+<div style="display:none">
+    <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+</div>

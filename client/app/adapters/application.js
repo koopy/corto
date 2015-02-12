@@ -28,8 +28,10 @@ DS.RESTAdapter.extend({
     return this._super.apply(this, arguments);
   },
   headers: function () {
+    var ret = {};
     return {
-      serializerType: this.get('serializerType')
+      serializerType: this.get('serializerType'),
+      pagination: true
     };
   }.property('serializerType')
 });

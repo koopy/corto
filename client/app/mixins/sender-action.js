@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+var slice = [].slice,
+  get = Ember.get;
 export default Ember.Mixin.create({
   asSender: true,
   send: function (actionName) {

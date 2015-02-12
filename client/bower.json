@@ -16,6 +16,7 @@
     "jquery-ui": "1.10.1",
     "jquery-mousewheel": "~3.1.4",
     "select2": "~3.5.2",
-    "bootstrap": "~3.3.1"
+    "bootstrap": "~3.3.1",
+    "ember-simple-auth": "0.7.3"
   }
 }

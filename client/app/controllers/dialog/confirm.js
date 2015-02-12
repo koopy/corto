@@ -10,6 +10,9 @@ var Promise = Ember.RSVP.Promise;
 export default
 Ember.ObjectController.extend({
   actions: {
+    refresh:function(){
+      console.log('refresh');
+    },
     deleteRecord: function () {
       var record = this.get('model');
       var promises = [];

@@ -1,0 +1,114 @@
+#!/usr/bin/env node
+'use strict';
+/**
+ * 1.read config :development || production
+ * 2.run commands according env
+ */
+//load packages
+var exec = require('child_process').spawn;
+var fs = require('fs');
+var chalk = require('chalk');
+var RSVP = require('rsvp');
+var Promise = RSVP.Promise;
+
+//load scripts and config
+var UI = require('../lib/ui');
+var calculateVersion = require('../lib/calculate-version');
+var env = process.env.NODE_ENV || 'development';
+var DEBUG_MODE = process.env.DEBUG_MODE || false;
+process.env.DEBUG = process.env.DEBUG || '*';
+var isProduction = env === 'production';
+
+//if production,can't be debug ,just run mode
+if (isProduction) DEBUG_MODE = false;
+var serverConfig;
+try {
+  var configBlock = ['config', 'json'];
+  if (isProduction) configBlock.splice(1, 0, env);
+  serverConfig = require('../server/config/app/' + configBlock.join('.'));
+} catch (e) {
+  //Guarantee the base config.json
+  serverConfig = require('../server/config/app/config.json');
+}
+
+var proxy = serverConfig.url;
+var packageConfig = require('../package.json');
+var projectName = packageConfig.name;
+var projectDescription = packageConfig.description || '';
+var version = calculateVersion();
+
+var isWindows = process.platform === 'win32';
+function commandCompatible(command) {
+  if (isWindows) {
+    command += '.cmd';
+  }
+  return command;
+}
+
+var commands = {
+  ember: commandCompatible('ember'),
+  slc: commandCompatible('slc')
+};
+
+function Startup(options) {
+  options = options || {};
+  //TODO should merge ?
+  this.options = options;
+  this.ui = new UI({
+    inputStream: process.stdin,
+    outputStream: process.stdout
+  });
+  //check if the exec can return promise
+  this.exec = options.exec || exec;
+}
+Startup.prototype.run = function () {
+  var options = this.options;
+  //ready
+  this.ui.write('platform:' + chalk.green(process.platform) + '\n');
+  this.ui.write(options.projectName + ' version: ' + chalk.green(options.version) + '\n');
+  this.ui.write(options.projectDescription + '\n');
+  this.ui.pleasantProgress.start(chalk.green('startup'), chalk.green('.'));
+
+  return new Promise(function (resolve, reject) {
+    //TODO check the global commander:ember-cli and strong-cli
+    //TODO check command complete and return promise (promise.all)
+    //command : ember serve
+    if (!options.isProduction) {
+      var emberShell = this.exec(options.commands.ember, ['server', '--proxy', options.proxy], {cwd: './client'});
+      emberShell.stdout.on('data', this.ui.write.bind(this.ui));
+    }
+    //command : slc run
+    var slcShell = this.exec(options.commands.slc, [options.DEBUG_MODE ? 'debug' : 'run']);
+    slcShell.stdout.on('data', this.ui.write.bind(this.ui));
+
+    var result = [];
+    slcShell.stderr.on('readable', function () {
+      var chunk;
+      while (null !== (chunk = slcShell.stderr.read())) {
+        result.push(chunk);
+      }
+    }.bind(this));
+    slcShell.stderr.on('end', function () {
+      emberShell.kill();
+      slcShell.kill();
+      reject(result.toString());
+    }.bind(this));
+  }.bind(this)).then(function () {
+      //something todo
+    }.bind(this)).catch(function logError(reason) {
+      this.ui.write(chalk.red(reason));
+    }.bind(this)).finally(function () {
+      this.pleasantProgress.stop();
+    }.bind(this));
+};
+
+//call the run method to exec commands
+new Startup({
+  version: version,
+  proxy: proxy,
+  DEBUG_MODE: DEBUG_MODE,
+  projectName: projectName,
+  projectDescription: projectDescription,
+  isProduction: isProduction,
+  commands: commands
+}).run();

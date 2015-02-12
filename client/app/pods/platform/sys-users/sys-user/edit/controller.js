@@ -6,6 +6,12 @@ import Ember from 'ember';
 export default
 Ember.ObjectController.extend({
   actions:{
+    rollback:function(){
+      var model = this.get('model');
+      if(model.get('isDirty')){
+        model.rollback();
+      }
+    },
     back:function(){
       this.transitionToRoute('platform.sysUsers.sysUser');
     },

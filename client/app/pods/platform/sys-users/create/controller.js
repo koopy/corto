@@ -6,6 +6,11 @@ import Ember from 'ember';
 export default
 Ember.ObjectController.extend({
   actions:{
+    rollback:function(){
+      var model = this.get('model');
+      var store = this.store;
+      store.dematerializeRecord(model);
+    },
     back:function(){
       this.transitionToRoute('platform.sysUsers.index');
     },

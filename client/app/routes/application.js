@@ -1,11 +1,11 @@
 import Ember from 'ember';
-
+import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 
 var DIALOG = 'dialog';
 var get  = Ember.get;
 var a_slice = [].slice;
 export default
-Ember.Route.extend({
+Ember.Route.extend(ApplicationRouteMixin,{
   dialogs: null,
   init:function(){
     this._super();
@@ -43,7 +43,7 @@ Ember.Route.extend({
     },
     closeModal: function () {
       var dialogs = this.get('dialogs');
-      Ember.assert('Can not close modal without any one modal exists', dialogs.length != 0);
+      Ember.assert('Can not close modal without any modal exists', dialogs.length != 0);
       dialogs.pop();
       var lastConfig = dialogs[dialogs.length - 1];
       this.disconnectOutlet({
@@ -59,14 +59,14 @@ Ember.Route.extend({
     subModal: function (yieldName) {
       var name = this.pathForDialog(yieldName);
 
-      var controller = this.controllerFor(name);
-      //sendEvent controller with open event
-      Ember.sendEvent(controller,'open');
-
       var dialogs = this.get('dialogs');
       Ember.assert('Can not open sub modal in the root,it must be opened by parent modal', dialogs.length != 0);
       //get from last one
       var lastConfig = dialogs[dialogs.length - 1];
+      var controller = this.controllerFor(name);
+      //sendEvent controller with open event
+      var lastController = this.controllerFor(lastConfig.dialogName);
+      Ember.sendEvent(controller,'open',[lastController]);
 
       //set current dialog to last one
       dialogs.push({
@@ -77,7 +77,8 @@ Ember.Route.extend({
       this.render(name,{
         into: lastConfig.dialogName,
         view: 'modal',
-        outlet: 'modal'
+        outlet: 'modal',
+        controller: controller
       });
     }
   }

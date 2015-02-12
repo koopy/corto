@@ -1,8 +1,9 @@
 module.exports = function(SysUser) {
-//  SysUser.getApp(function (err, app) {
-//
-//    SysUser.find = function(){
-//
-//    }
-//  });
+  function defaultDate(){
+    return new Date();
+  }
+  SysUser.definition.properties.created.default =
+  SysUser.definition.properties.modified.default =
+    defaultDate();
+
 };

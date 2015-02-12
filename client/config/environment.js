@@ -4,7 +4,6 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'app',
     podModulePrefix: 'app/pods',
-//    usePodsByDefault: true,
     environment: environment,
     baseURL: '/',
     locationType: 'hash',
@@ -15,6 +14,10 @@ module.exports = function(environment) {
       'connect-src': "'self'",
       'img-src': "'self'",
       'style-src': "'self' 'unsafe-inline'"
+    },
+    'simple-auth':{
+      routeAfterAuthentication: 'dashboard',
+      routeIfAlreadyAuthenticated: 'dashboard'
     },
     EmberENV: {
       FEATURES: {

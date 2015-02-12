@@ -38,5 +38,10 @@ Ember.ArrayController.extend({
     get(crumbs,'lastObject').set('active', true);
 
     return crumbs;
-  })
+  }),
+  actions: {
+    logout: function () {
+      this.send('openModal', 'confirm');
+    }
+  }
 });

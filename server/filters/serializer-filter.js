@@ -46,11 +46,11 @@ var SerializerFilter = BaseFilter.extend({
 
 
   getRootKey: function (ctx) {
-    var accepts = ctx.method.accepts,accept;
+    var accepts = ctx.method.accepts, accept;
 
     for (var i = 0, l = accepts.length; i < l; i++) {
-      accept=accepts[i];
-      if(accept.http && accept.http.source === 'body'){
+      accept = accepts[i];
+      if (accept.http && accept.http.source === 'body') {
         return accept.arg;
       }
     }
