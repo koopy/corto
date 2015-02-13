@@ -4,7 +4,8 @@ import Base from 'ember-validations/validators/base';
 var get = Ember.get;
 var set = Ember.set;
 
-export default Base.extend({
+export default
+Base.extend({
   init: function () {
     /*jshint expr:true*/
     this._super();
@@ -28,32 +29,43 @@ export default Base.extend({
     // Make model invalid by default
     // Not the best - should have a default error message that is added to the
     // errors hash before server validations have run. Eg: 'has not been validated'
-    this.errors.pushObject(this.options.message);
+    //this.errors.pushObject(this.options.message);
   },
 
   _validate: function () {
     if (this.canValidate()) {
-      var self =this;
-      return new Ember.RSVP.Promise(function(resolve,reject){
-        self.validateRemotely(resolve,reject);
+      var self = this;
+      return new Ember.RSVP.Promise(function (resolve, reject) {
+        self.validateRemotely(resolve, reject);
       });
+    } else {
+      if (this.get('isValid')) {
+        return Ember.RSVP.Promise.resolve(true);
+      } else {
+        return Ember.RSVP.Promise.resolve(true);
+      }
     }
   },
-  canValidate:function(){
-    var flag = this._super();
-    var model = this.model;
-    var canRemote = model.get('isNew') || model.get('isDirty');
-    var options = this.get('options');
-    var validateOnNew = canRemote && options.validateOnNew;
-    return canRemote && validateOnNew;
+  canValidate: function () {
+    var flag, model, canRemote, options, validateOnNew, remodify;
+    var isEditing = false;
+    flag = this._super();
+    model = this.model;
+    canRemote = model.get('isNew') || model.get('isDirty');
+    isEditing = !model.get('isNew');
+    options = this.get('options');
+    validateOnNew = canRemote && options.validateOnNew;
+    remodify = !!options.remodify;
+    //edit mode: if field can not remodify ,so just return true
+    return flag && canRemote && (isEditing ? remodify : validateOnNew);
   },
 
   // Sets the options to send with the ajax request and wraps the call() funciton in a debounce
-  validateRemotely: function (resolve,reject) {
+  validateRemotely: function (resolve, reject) {
     this.setOptions();
 
     if (this.options.url !== undefined) {
-      this.call(resolve,reject);
+      this.call(resolve, reject);
     }
   },
 
@@ -80,7 +92,7 @@ export default Base.extend({
       var type = store.modelFor(model.constructor);
       var adapter = store.adapterFor(type);
       var url = adapter.buildURL(type.typeKey);
-      options.url = [url,this.property,options.endpoint || "uniqueness"].join("/");
+      options.url = [url, this.property, options.endpoint || "uniqueness"].join("/");
     }
   },
 

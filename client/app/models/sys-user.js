@@ -30,10 +30,10 @@ var Model = Base.extend({
   validations: {
     nickname: {
       presence: true,
-      uniqueness:function(){
+      uniqueness: function () {
         return {
-          message:"用户名已存在，请重新输入"
-        };
+          validateOnNew: true
+        }
       }
     }
   }

@@ -43,6 +43,16 @@
                             <div class="space-8"></div>
 
                             <div class="massage" style="color:red;">
+                                {{#if isEditing}}
+                                    <div class="spinner">
+                                        <div class="rect1">&nbsp;</div>
+                                        <div class="rect2">&nbsp;</div>
+                                        <div class="rect3">&nbsp;</div>
+                                        <div class="rect4">&nbsp;</div>
+                                        <div class="rect5">&nbsp;</div>
+                                    </div>
+
+                                {{/if}}
                                 {{errorMessage}}
                             </div>
 

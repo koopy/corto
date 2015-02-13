@@ -6,6 +6,7 @@ import RemoteValidator from './remote-validator';
 var get = Ember.get;
 var set = Ember.set;
 /**
+ * TODO
  * 编辑时，两种情况
  * 1.字段不可修改，字段不需要发起请求
  * 2.字段可修改：如果该字段没有发生改变，则不需要发起请求
@@ -36,6 +37,7 @@ export default RemoteValidator.extend({
         message: Messages.defaults.uniqueness,
         errorOnStatus: [409],
         validateOnNew: true,
+        remodify: false,
         data: self.get('model.data')
       };
     }

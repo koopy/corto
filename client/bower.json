@@ -17,6 +17,7 @@
     "jquery-mousewheel": "~3.1.4",
     "select2": "~3.5.2",
     "bootstrap": "~3.3.1",
-    "ember-simple-auth": "0.7.3"
+    "ember-simple-auth": "0.7.3",
+    "antiscroll": "fa3f81d3c07b647a63036da1de859fcaf1355993"
   }
 }

@@ -4,7 +4,7 @@
             <div class="dataTables_wrapper">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div id="sample-table-2_length" class="dataTables_length">
+                        <div class="dataTables_length">
                           {{view "select"
                           content=statusContent
                           value=status
@@ -16,9 +16,9 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="dataTables_filter" id="sample-table-2_filter">
-                            <button class="btn btn-white" {{action "create"}} data-toggle="modal" data-target="#myModal"><i class="icon-plus-sign purple align-top bigger-125"></i> 新建</button>
-                            <button class="btn btn-white" {{action "delBatch" 'modal'}}><i class="icon-trash red align-top bigger-125"></i> 批量删除</button>
+                        <div class="dataTables_filter">
+                            <button class="btn btn-default btn-tab" {{action "delBatch" 'modal'}} title="批量删除"><i class="fa fa-trash-o light-grey"></i></button>
+                            <button class="btn btn-default btn-tab" {{action "create"}} title="新建"><i class="fa fa-plus light-grey"></i></button>
                         </div>
                     </div>
                 </div>
@@ -26,6 +26,7 @@
               hasFooter=false
               enableContentSelection=true
               selectionMode="multiple"
+              rowHeight=37
               columns=columns
               content=content
               persistedSelection=controller.selection
