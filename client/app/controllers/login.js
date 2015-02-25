@@ -7,7 +7,7 @@ export default
 Ember.Controller.extend(LoginControllerMixin,{
   authenticator: 'authenticator:token',
   isValid: Ember.computed.empty('errors.[]'),
-  isEditing: false,
+  isAuthenticating: false,
   errorMessage: function () {
     var errors = this.get('errors');
     var message = [];
@@ -57,7 +57,7 @@ Ember.Controller.extend(LoginControllerMixin,{
   actions: {
     login: function () {
       var self = this;
-      self.set('isEditing',true);
+      self.set('isAuthenticating',true);
       this.validate().then(function(){
         //TODO stop use private property ：_actions
         return self._actions['authenticate'].apply(self).catch(function(reason){
@@ -65,7 +65,7 @@ Ember.Controller.extend(LoginControllerMixin,{
           self.errors.pushObject(reason.error.message);
         });
       }).finally(function(){
-        self.set('isEditing',false);
+        self.set('isAuthenticating',false);
       });
     }
   }

@@ -110,11 +110,10 @@ export default Base.extend({
     }
     return new Ember.RSVP.Promise(function(resolve, reject) {
       if (!Ember.isEmpty(_this.serverTokenRevocationEndpoint)) {
-        _this.makeRequest(_this.serverTokenRevocationEndpoint, {
-          tokenId: data.id
-        }).then(function () {
+        //TODO query string or headers or post body
+        _this.makeRequest(_this.serverTokenRevocationEndpoint + '?access_token=' + data.id).then(function () {
             success(resolve);
-          }).catch(function (reason) {
+          }).fail(function (reason) {
             reject(reason);
           });
       } else {

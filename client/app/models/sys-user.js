@@ -32,7 +32,8 @@ var Model = Base.extend({
       presence: true,
       uniqueness: function () {
         return {
-          validateOnNew: true
+          validateOnNew: true,
+          message:'The nickname has been exists'
         }
       }
     }
