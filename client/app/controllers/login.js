@@ -5,6 +5,8 @@ var set = Ember.set;
 var get = Ember.get;
 export default
 Ember.Controller.extend(LoginControllerMixin,{
+  identification:null,
+  password:null,
   authenticator: 'authenticator:token',
   isValid: Ember.computed.empty('errors.[]'),
   isAuthenticating: false,

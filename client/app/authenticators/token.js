@@ -74,7 +74,7 @@ export default Base.extend({
         password: credentials.password
       };
       data[_this.identificationAttributeName] = credentials.identification;
-      _this.makeRequest(_this.serverTokenEndpoint, data).then(function(response) {
+      _this.makeRequest(_this.serverTokenEndpoint + '?include=user', data).then(function(response) {
         Ember.run(function() {
           //TODO schedule token refresh
 //          var expiresAt = _this.absolutizeExpirationTime(response.expires_in);

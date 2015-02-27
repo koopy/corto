@@ -23,18 +23,12 @@ var app = new EmberApp({
 
 app.import('vendor/bootstrap/dist/js/bootstrap.js');
 app.import('vendor/bootstrap/dist/css/bootstrap.css');
-app.import('vendor/bootstrap/fonts/glyphicons-halflings-regular.eot', {
-    destDir: 'fonts'
-});
-app.import('vendor/bootstrap/fonts/glyphicons-halflings-regular.svg', {
-    destDir: 'fonts'
-});
-app.import('vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf', {
-    destDir: 'fonts'
-});
-app.import('vendor/bootstrap/fonts/glyphicons-halflings-regular.woff', {
-    destDir: 'fonts'
-});
 
+var font = 'vendor/bootstrap/fonts/glyphicons-halflings-regular';
+['eot', 'svg', 'ttf', 'woff'].forEach(function (extName) {
+  app.import(font + '.' + extName, {
+    destDir: 'fonts'
+  });
+});
 
 module.exports = app.toTree();

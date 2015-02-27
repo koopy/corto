@@ -19,6 +19,7 @@
     "loopback-connector-mysql": "^1.5.1",
     "loopback-datasource-juggler": "^2.7.0",
     "loopback-ember-generate": "0.0.5",
+    "minimatch": "^2.0.1",
     "serve-favicon": "^2.0.1"
   },
   "optionalDependencies": {

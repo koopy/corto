@@ -106,12 +106,12 @@
 
   Ember.Handlebars.registerHelper('input', function(property, options) {
     if (arguments.length === 1) {
-      return Ember.Handlebars.helpers['ember-input'].call(this, arguments[0]);
+      return Ember.Handlebars.helpers['ember-input'].helperFunction.call(this, arguments[0]);
     }
 
     options = Ember.EasyForm.processOptions(property, options);
     options.hash.isBlock = !!(options.fn);
-    return Ember.Handlebars.helpers.view.call(this, Ember.EasyForm.Input, options);
+    return Ember.Handlebars.helpers.view.helperFunction.call(this, [Ember.EasyForm.Input],options.hash, options,{data:options.data});
   });
 
 })();
@@ -535,7 +535,7 @@
     tagName: 'button',
     template: Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
       this.compilerInfo = [4,'>= 1.0.0'];
-      helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+      helpers = Ember.merge({}, Ember.Handlebars.helpers); data = data || {};
       var hashTypes, hashContexts, escapeExpression=this.escapeExpression;
 
 
@@ -582,7 +582,7 @@
 (function() {
   Ember.EasyForm.Config.registerTemplate('easyForm/error', Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
-    helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+    helpers = Ember.merge({}, Ember.Handlebars.helpers); data = data || {};
     var hashTypes, hashContexts, escapeExpression=this.escapeExpression;
 
 
@@ -599,7 +599,7 @@
 (function() {
   Ember.EasyForm.Config.registerTemplate('easyForm/hint', Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
-    helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+    helpers = Ember.merge({}, Ember.Handlebars.helpers); data = data || {};
     var hashTypes, hashContexts, escapeExpression=this.escapeExpression;
 
 
@@ -616,7 +616,7 @@
 (function() {
   Ember.EasyForm.Config.registerTemplate('easyForm/input', Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
-    helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+    helpers = Ember.merge({}, Ember.Handlebars.helpers); data = data || {};
     var buffer = '', stack1, hashContexts, hashTypes, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
@@ -642,7 +642,7 @@
 (function() {
   Ember.EasyForm.Config.registerTemplate('easyForm/inputControls', Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
-    helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+    helpers = Ember.merge({}, Ember.Handlebars.helpers); data = data || {};
     var buffer = '', stack1, stack2, hashContexts, hashTypes, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
 
     function program1(depth0,data) {
@@ -694,7 +694,7 @@
 (function() {
   Ember.EasyForm.Config.registerTemplate('easyForm/label', Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [4,'>= 1.0.0'];
-    helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+    helpers = Ember.merge({}, Ember.Handlebars.helpers); data = data || {};
     var hashTypes, hashContexts, escapeExpression=this.escapeExpression;
 
 

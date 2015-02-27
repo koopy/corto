@@ -1,55 +1,54 @@
 import Ember from 'ember';
 import config from './config/environment';
+import Configuration from 'simple-auth/configuration';
 
+var set = Ember.set;
 var Router = Ember.Router.extend({
-  location: config.locationType
+  location: config.locationType,
+  _doURLTransition : function(routerJsMethod, url){
+    //TODO how to do better
+    var transition = this.router[routerJsMethod](url || '/'),
+      container = this.container,
+      session = container.lookup('simple-auth-session:main'),
+      applicationRoute = container.lookup('route:application');
+    transition.then(null, function(error) {
+      if (!error || !error.name) { return; }
+      if (error.name === "UnrecognizedURLError") {
+        if(session.get('isAuthenticated')){
+          Ember.assert("The URL '" + error.message + "' did not match any routes in your application");
+        }else{
+          applicationRoute.transitionTo(Configuration.authenticationRoute);
+        }
+      }
+      return error;
+    }, 'Ember: Process errors from Router');
+    return transition;
+  },
+  sidebarRoutes:function(){
+    return filterRoutesByGroup(this.get('availableRoutes')[0].children,'sidebar');
+  }.property('availableRoutes')
 });
-
-Router.map(function() {
+function filterRoutesByGroup(routes,group,parent){
+  var result = [];
+  routes = Ember.copy(routes, true);
+  if (Ember.isArray(routes)) {
+    routes.forEach(function (route) {
+      if (route.group === group) {
+        if (parent) {
+          route.template = parent + '.' + route.template
+        }
+        result.push(route);
+        if (Ember.isArray(route.children) && route.children.length > 0) {
+          route.children = filterRoutesByGroup(route.children, group, route.template);
+        }
+      }
+    });
+  }
+  return result;
+}
+Router.map(function () {
   this.route('login');
-  this.resource('dashboard',{path:'/'},function(){
-
-    this.resource('personal',function(){
-
-    });
-    this.resource('report',function(){
-
-    });
-    this.resource('flow',function(){
-
-    });
-    this.resource('platform', function() {
-      this.resource('platform.sysUsers',{path:'sysUsers'}, function() {
-        this.route('create');
-        this.resource('platform.sysUsers.sysUser',{path:'/:sysUser_id'},function(){
-          this.route("edit");
-          this.resource('platform.sysUsers.sysUser.detail',{path:'/'},function(){
-            this.route('profile', {path: '/'});
-            this.route('roleAllocation');
-            this.route('organization');
-          });
-        });
-      });
-      this.resource('sysRoles', function() {
-        this.route('create');
-        this.resource('sysRole',{path:'/:sysRole_id'},function(){
-          this.route("edit");
-        });
-      });
-      this.resource('sysGroups', function() {
-        this.route('create');
-        this.resource('sysGroup',{path:'/:sysGroup_id'},function(){
-          this.route("edit");
-        });
-      });
-      this.resource('sysDuties', function() {
-        this.route('create');
-        this.resource('sysDuty',{path:'/:sysDuty_id'},function(){
-          this.route("edit");
-        });
-      });
-    });
-  });
+  this.resource('main',{path:'/'});
 });
 
 export default Router;

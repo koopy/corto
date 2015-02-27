@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import { initialize } from 'app/initializers/reopen';
+import { initialize } from 'app/initializers/authentication';
 
 var container, application;
 
-module('ReopenInitializer', {
+module('AuthenticationInitializer', {
   setup: function() {
     Ember.run(function() {
       application = Ember.Application.create();

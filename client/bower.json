@@ -1,10 +1,9 @@
 {
   "name": "params",
   "dependencies": {
-    "handlebars": "~1.3.0",
     "jquery": "^1.11.1",
-    "ember": "1.8.1",
-    "ember-data": "1.0.0-beta.11",
+    "ember": "1.10",
+    "ember-data": "1.0.0-beta.15",
     "ember-resolver": "~0.1.10",
     "loader.js": "stefanpenner/loader.js#1.0.1",
     "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.3",
@@ -18,6 +17,7 @@
     "select2": "~3.5.2",
     "bootstrap": "~3.3.1",
     "ember-simple-auth": "0.7.3",
-    "antiscroll": "fa3f81d3c07b647a63036da1de859fcaf1355993"
+    "antiscroll": "fa3f81d3c07b647a63036da1de859fcaf1355993",
+    "handlebars": "~1.3.0"
   }
 }

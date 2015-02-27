@@ -14,22 +14,22 @@ var App = Ember.Application.extend({
 loadInitializers(App, config.modulePrefix);
 
 /**
- * inital todos
+ * initial todos
  */
 moment.locale('zh-cn');
-Ember.EasyForm.Config.registerWrapper('bootstrap', {
-  // Define the custom template
-  inputTemplate: 'bootstrap-input',
-
-  // Define a custom config used by the template
-  controlsWrapperClass: 'col-sm-8',
-
-  // Define the classes for the form, label, error...
-  formClass: 'form-horizontal',
-  fieldErrorClass: 'has-error',
-  errorClass: 'has-error',
-  hintClass: 'help-block',
-  labelClass: 'col-sm-4 control-label no-padding-right',
-  inputClass: 'form-group'
-});
+//Ember.EasyForm.Config.registerWrapper('bootstrap', {
+//  // Define the custom template
+//  inputTemplate: 'bootstrap-input',
+//
+//  // Define a custom config used by the template
+//  controlsWrapperClass: 'col-sm-8',
+//
+//  // Define the classes for the form, label, error...
+//  formClass: 'form-horizontal',
+//  fieldErrorClass: 'has-error',
+//  errorClass: 'has-error',
+//  hintClass: 'help-block',
+//  labelClass: 'col-sm-4 control-label no-padding-right',
+//  inputClass: 'form-group'
+//});
 export default App;

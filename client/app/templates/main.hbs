@@ -48,7 +48,7 @@
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo">
 								<span class="user-info">
-									王晓明
+									{{t 'home.title'}}--{{session.currentUser.username}}
 								</span>
 
                         <i class="fa fa-angle-down btn-caret"></i>
@@ -72,7 +72,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a {{ action 'invalidateSession' }}>
+                            <a {{ action 'logout' }}>
                                 <i class="icon-off"></i>
                                 Logout
                             </a>
@@ -96,17 +96,12 @@
 
 <div class="main-content">
 <div class="breadcrumbs">
-    <ul class="breadcrumb">
+    <ul class='breadcrumb'>
         <li>
             <i class="fa fa-home home-icon"></i>
         </li>
-        <li>
-            <a href="#">首页</a>
-        </li>
-        <li>
-            <a href="#">平台管理</a>
-        </li>
-        <li class="active">机构管理</li>
+      {{#each bread in breadcrumbs}}
+          <li>{{unbound bread.name}}</li>{{/each}}
     </ul>
     <!-- .breadcrumb -->
 </div>

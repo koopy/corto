@@ -5,75 +5,25 @@
     <!-- #sidebar-shortcuts -->
 
     <ul class="nav nav-list">
-        <li>
-            <a href="#">
-                <i class="fa fa-home"></i>
-                <span class="menu-text">首页</span>
-
-                <b class="arrow fa fa-caret-down"></b>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa fa-magic"></i>
-                <span class="menu-text">个人办公</span>
-
-                <b class="arrow fa fa-caret-down"></b>
-            </a>
-        </li>
-
-        <li>
-            <a class="dropdown-toggle">
-                <i class="fa fa-laptop"></i>
-                <span class="menu-text">平台管理</span>
-                <b class="arrow fa fa-caret-up"></b>
-            </a>
-
-            <ul class="submenu">
-              {{#link-to 'platform.sysUsers' tagName='li'}}
-                  <a href="#" class="dropdown-toggle">
-                      <i class="icon-double-angle-right"></i>
-                      用户管理
-                  </a>
-              {{/link-to}}
-
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa fa-clock-o"></i>
-                <span class="menu-text">流程管理</span>
-
-                <b class="arrow fa fa-caret-down"></b>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="fa fa-diamond"></i>
-                <span class="menu-text">理财管理</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-clipboard"></i>
-                <span class="menu-text">标据管理</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-line-chart"></i>
-                <span class="menu-text">同业资产管理</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-trophy"></i>
-                <span class="menu-text">同业投资管理</span>
-            </a>
-        </li>
+        {{#each item in target.sidebarRoutes}}
+            <li>
+                <a class="dropdown-toggle">
+                    <i {{bind-attr class=":fa item.icon"}}></i>
+                    <span class="menu-text">{{unbound item.name}}</span>
+                    <b class="arrow fa fa-caret-up"></b>
+                </a>
+                <ul class="submenu">
+                  {{#each sub in item.children}}
+                    {{#link-to sub.template tagName='li'}}
+                        <a href="#" class="dropdown-toggle">
+                            <i class="icon-double-angle-right"></i>
+                            {{unbound sub.name}}
+                        </a>
+                    {{/link-to}}
+                  {{/each}}
+                </ul>
+            </li>
+        {{/each}}
     </ul>
     <!-- /.nav-list -->
 

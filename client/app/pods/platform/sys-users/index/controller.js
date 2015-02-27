@@ -17,7 +17,7 @@ Ember.ArrayController.extend(PagedArray(SysUser),{
       this.transitionToRoute('platform.sysUsers.create');
     },
     detail: function (model) {
-      this.transitionToRoute('platform.sysUsers.sysUser', model);
+      this.transitionToRoute('platform.sysUsers.sysUser.detail', model);
     }
   }
 });

@@ -1,9 +1,12 @@
 import Ember from 'ember';
 import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
+import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
+import Configuration from 'simple-auth/configuration';
 
-var DIALOG = 'dialog';
-var get  = Ember.get;
-var a_slice = [].slice;
+var DIALOG = 'dialog',
+  get  = Ember.get,
+  a_slice = [].slice;
+
 export default
 Ember.Route.extend(ApplicationRouteMixin,{
   dialogs: null,
@@ -15,6 +18,38 @@ Ember.Route.extend(ApplicationRouteMixin,{
     return DIALOG + '/' + yieldName;
   },
   actions: {
+    sessionAuthenticationSucceeded:function(){
+      this.store.find('sysAcl').then(function(){
+        var attemptedTransition = this.get(Configuration.sessionPropertyName).get('attemptedTransition');
+        if (attemptedTransition) {
+          attemptedTransition.retry();
+          this.get(Configuration.sessionPropertyName).set('attemptedTransition', null);
+        } else {
+          this.transitionTo(Configuration.routeAfterAuthentication);
+        }
+        //TODO get acl from backend
+        //TODO router.map authority routes
+        //TODO
+      }.bind(this));
+    },
+    sessionInvalidationSucceeded: function() {
+      if (!Ember.testing) {
+        this.transitionTo(Configuration.authenticationRoute);
+      }
+    },
+
+    /**
+     This action is invoked whenever session invalidation fails. This mainly
+     serves as an extension point to add custom behavior and does nothing by
+     default.
+
+     @method actions.sessionInvalidationFailed
+     @param {any} error The error the promise returned by the authenticator rejects with, see [`Authenticators.Base#invalidate`](#SimpleAuth-Authenticators-Base-invalidate)
+     */
+    sessionInvalidationFailed: function(error) {
+      //TODO
+    },
+
     httpError: function (e, xhr, options, thrownError) {
       console.log("httpError catch");
     },
@@ -80,6 +115,14 @@ Ember.Route.extend(ApplicationRouteMixin,{
         outlet: 'modal',
         controller: controller
       });
+    },
+    logout: function () {
+//      this.send('openModal', 'confirm');
+
+      var container = this.container;
+      var app = container.lookup('application:main');
+      this.send('invalidateSession');
+      //TODO
     }
   }
 });

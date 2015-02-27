@@ -16,8 +16,8 @@ module.exports = function(environment) {
       'style-src': "'self' 'unsafe-inline'"
     },
     'simple-auth':{
-      routeAfterAuthentication: 'dashboard',
-      routeIfAlreadyAuthenticated: 'dashboard'
+      routeAfterAuthentication: 'main',
+      routeIfAlreadyAuthenticated: 'main'
     },
     EmberENV: {
       FEATURES: {
@@ -29,6 +29,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      defaultLocale: 'en'
     }
   };
 

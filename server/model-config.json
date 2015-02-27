@@ -61,5 +61,9 @@
   "patient": {
     "dataSource": "db",
     "public": true
+  },
+  "sysAcl": {
+    "dataSource": "db",
+    "public": true
   }
 }
