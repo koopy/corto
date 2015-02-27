@@ -10,7 +10,7 @@ var config = {
   children: [
     {
       name: '流程分类管理',
-      template: '',
+      template: 'processCategory',
       authCode: 'wf:process_category',
       group: 'sidebar',
       children: [
@@ -51,19 +51,19 @@ var config = {
     },
     {
       name: '流程实例管理',
-      template: '',
+      template: 'processInstance',
       authCode: 'wf:process_instance',
       group: 'sidebar'
     },
     {
       name: '流程任务管理',
-      template: '',
+      template: 'processTask',
       authCode: 'wf:process_task',
       group: 'sidebar'
     },
     {
       name: '流转任务管理',
-      template: '',
+      template: 'flowTask',
       authCode: 'wf:flow_task',
       group: 'sidebar'
     },

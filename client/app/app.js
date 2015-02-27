@@ -2,20 +2,24 @@ import Ember from 'ember';
 import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
+import resolveWildcard from 'app/utils/resolve-wildcard';
 
+var locales = resolveWildcard('app/locales/*');
+locales = locales.names.map(function (item) {
+  var segments = item.split('/');
+  return segments[segments.length - 1];
+});
 //Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
-  Resolver: Resolver
+  Resolver: Resolver,
+  localeNames: locales
 });
 
 loadInitializers(App, config.modulePrefix);
 
-/**
- * initial todos
- */
 moment.locale('zh-cn');
 //Ember.EasyForm.Config.registerWrapper('bootstrap', {
 //  // Define the custom template

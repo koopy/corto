@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Router from '../router';
 import acls from 'app/acl';
+import resolveWildcard from 'app/utils/resolve-wildcard';
 
 var config = {
   strict: true,
@@ -12,58 +13,14 @@ acls = acls.map(function (acl) {
     authCode: acl
   };
 });
-
-
-if (typeof requirejs.entries === 'undefined') {
-  requirejs.entries = requirejs._eak_seen;
-}
-var entries = requirejs.entries;
-/**
- * *  current parent's all child
- * ** all sub level,cascade
- */
-function resolve(path){
-  var ret = [];
-  var parts = path.split('/');
-  var wildcard = parts[parts.length - 1];
-  var prefix = parts.slice(0,-1);
-  var parent = prefix.join('/');
-  //end
-  if (wildcard.indexOf('*')>-1) {
-    for(var module in entries){
-      var moduleParts = module.split('/');
-      var modulePrefix = moduleParts.slice(0, prefix.length);
-      var remain = moduleParts.slice(modulePrefix.length);
-      var parentBase = modulePrefix.join('/');
-      if (parent == parentBase) {
-        if ((wildcard === '*' && remain.length == 1) || (wildcard === '**' && remain.length >= 1)) {
-          ret.push(module);
-        }
-      }
-    }
-  }else{
-    //TODO use minimatch
-  }
-  return ret;
-}
-var ret = resolve('app/routemetas/*');
-var modules = ret.map(function(moduleName){
-  var module = require(moduleName, null, null, true /* force sync */);
-
-  if (module && module['default']) { module = module['default']; }
-
-  if (module === undefined) {
-    throw new Error("Unable to find module with moduleName: " + moduleName);
-  }
-
-  return module;
-});
+var routemetas = resolveWildcard('app/routemetas/*');
+routemetas = routemetas.modules;
 var root = {
   name : '首页',
   template : 'main',
   path : '/',
   authCode : 'main',
-  children: modules
+  children: routemetas
 };
 export default function lazyMap(container,application) {
   var session = container.lookup('simple-auth-session:main');

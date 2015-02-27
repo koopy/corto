@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 var get = Ember.get;
-
+var set = Ember.set;
 /**
  * 1.根据默认设定的路由规则，解析出当前的针对模型
  * 2.正常路由规则如下：
@@ -58,14 +58,22 @@ function findRouteMap(path, routeMaps) {
 }
 
 export default Ember.Controller.extend({
-  needs:['application'],
+  needs: ['application'],
   breadcrumbs: function () {
     var currentPath = this.get('controllers.application.currentPath'),
       availableRoutes = this.get('target.availableRoutes'),
       breads = [];
-    if(Ember.isArray(availableRoutes) && availableRoutes.length > 0){
+    if (Ember.isArray(availableRoutes) && availableRoutes.length > 0) {
       breads = findRouteMap(currentPath, availableRoutes[0].children);
     }
     return breads;
-  }.property('controllers.application.currentPath','target.availableRoutes')
+  }.property('controllers.application.currentPath', 'target.availableRoutes'),
+  actions: {
+    setLang: function (language) {
+      var application = this.container.lookup('application:main');
+      set(application, 'locale', language);
+      Ember.$.cookie('lang', language);
+      location.reload();
+    }
+  }
 });

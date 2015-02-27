@@ -5,18 +5,20 @@ import Configuration from 'simple-auth/configuration';
 var set = Ember.set;
 var Router = Ember.Router.extend({
   location: config.locationType,
-  _doURLTransition : function(routerJsMethod, url){
+  _doURLTransition: function (routerJsMethod, url) {
     //TODO how to do better
     var transition = this.router[routerJsMethod](url || '/'),
       container = this.container,
       session = container.lookup('simple-auth-session:main'),
       applicationRoute = container.lookup('route:application');
-    transition.then(null, function(error) {
-      if (!error || !error.name) { return; }
+    transition.then(null, function (error) {
+      if (!error || !error.name) {
+        return;
+      }
       if (error.name === "UnrecognizedURLError") {
-        if(session.get('isAuthenticated')){
+        if (session.get('isAuthenticated')) {
           Ember.assert("The URL '" + error.message + "' did not match any routes in your application");
-        }else{
+        } else {
           applicationRoute.transitionTo(Configuration.authenticationRoute);
         }
       }
@@ -24,11 +26,23 @@ var Router = Ember.Router.extend({
     }, 'Ember: Process errors from Router');
     return transition;
   },
-  sidebarRoutes:function(){
-    return filterRoutesByGroup(this.get('availableRoutes')[0].children,'sidebar');
+  sidebarRoutes: function () {
+    var routes = filterRoutesByGroup(this.get('availableRoutes')[0].children, 'sidebar');
+    var localization = function (r) {
+      r.forEach(function (item) {
+        item.name = t('sidebar.' + item.template + '.name');
+        if (item.children && item.children.length>0) {
+          localization(item.children);
+        }
+      });
+    }
+    var container = this.container;
+    var t = container.lookup('utils:t');
+    localization(routes);
+    return routes;
   }.property('availableRoutes')
 });
-function filterRoutesByGroup(routes,group,parent){
+function filterRoutesByGroup(routes, group, parent) {
   var result = [];
   routes = Ember.copy(routes, true);
   if (Ember.isArray(routes)) {
@@ -48,7 +62,8 @@ function filterRoutesByGroup(routes,group,parent){
 }
 Router.map(function () {
   this.route('login');
-  this.resource('main',{path:'/'});
+  this.resource('main', {path: '/'});
 });
 
-export default Router;
+export default
+Router;

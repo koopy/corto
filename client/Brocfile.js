@@ -30,5 +30,6 @@ var font = 'vendor/bootstrap/fonts/glyphicons-halflings-regular';
     destDir: 'fonts'
   });
 });
+app.import('vendor/jquery.cookie/jquery.cookie.js');
 
 module.exports = app.toTree();
