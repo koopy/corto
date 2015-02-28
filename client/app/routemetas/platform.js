@@ -1,12 +1,10 @@
 var config = {
-  name: '平台管理',
   icon: 'fa-laptop',
   template: 'platform',
   authCode: 'platform',
   group: 'sidebar',
   children: [
     {
-      name: '用户管理',
       template: 'sysUsers',
       authCode: 'sys:user',
       group: 'sidebar',
@@ -54,7 +52,6 @@ var config = {
       ]
     },
     {
-      name: '组织管理',
       template: 'sysOrgs',
       authCode: 'sys:org',
       group: 'sidebar',
@@ -100,7 +97,6 @@ var config = {
       ]
     },
     {
-      name: '群组管理',
       template: 'sysGroups',
       authCode: 'sys:group',
       group: 'sidebar',
@@ -128,7 +124,6 @@ var config = {
       ]
     },
     {
-      name: '角色管理',
       template: 'sysRoles',
       authCode: 'sys:role',
       group: 'sidebar',
@@ -156,7 +151,6 @@ var config = {
       ]
     },
     {
-      name: '职务管理',
       template: 'sysDuties',
       authCode: 'sys:duty',
       group: 'sidebar',

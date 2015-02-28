@@ -1,50 +1,68 @@
 import Ember from 'ember';
+import config from 'app/config/environment';
 import Router from '../router';
 import acls from 'app/acl';
 import resolveWildcard from 'app/utils/resolve-wildcard';
 
-var config = {
-  strict: true,
-  loggingDisabled: true,
-  enableAuth: true
-};
-acls = acls.map(function (acl) {
-  return {
-    authCode: acl
-  };
-});
-var routemetas = resolveWildcard('app/routemetas/*');
-routemetas = routemetas.modules;
-var root = {
-  name : '首页',
-  template : 'main',
-  path : '/',
-  authCode : 'main',
-  children: routemetas
-};
+var appConfig = config.APP;
+function normalizeAcl(acls){
+  if(Ember.isArray(acls)){
+    return acls.map(function (acl) {
+      return {
+        authCode: acl
+      };
+    });
+  }
+}
+acls = normalizeAcl(acls);
+/**
+ * field:{
+ * route/template
+ * authCode
+ * group
+ * children
+ * icon
+ * localePath
+ * }
+ * mix locale with field.route
+ */
+
+var routemetas = resolveWildcard('app/routemetas/*').modules;
+/**
+ * calc acls with all route ,to get that :
+ *  1.which route is match
+ *  2.which route is unmatch
+ *  3.how many acl is un match the whole current route
+ *  4.config a flag to warn or assert
+ *  5.should cascade ?
+ *
+ * @param container
+ * @param application
+ */
+var t = null;
+var lang = null;
 export default function lazyMap(container,application) {
+  //TODO last args : acl ,get from the backend
   var session = container.lookup('simple-auth-session:main');
   var router = container.lookup('router:main');
   var currentUser = session.get('currentUser');
+  var app = container.lookup('application:main');
+  if(!t){
+    t = container.lookup('utils:t');
+  }
+  lang = app.get('locale')|| app.get('defaultLocale');
   //TODO make field :username config
+  //TODO how to do when the user has no any permission
   Ember.assert('currentUser : ' + currentUser.get('username') + ' does not have  any permission', acls || (Ember.isArray(acls) && acls.length == 0));
 
-  var routes = Ember.copy([root], true);
+  var routes = Ember.copy(routemetas, true);
   //TODO just for test
   var permission = Ember.copy(acls);
-  if(currentUser.get('username')=='jwy'){
-
-  }else{
-    if (config.enableAuth === true) {
-      routes = filterRoutes(routes, permission);
-    }
+  if (appConfig.enableAuth === true) {
+    routes = filterRoutes(routes, permission);
   }
-//  if (config.enableAuth === true) {
-//    routes = filterRoutes(routes, acls);
-//  }
 
   router.set('availableRoutes', routes);
-  var sidebarRoutes = router.get('sidebarRoutes');
   //TODO clear all routes
   Router.map(function () {
     this.resource('main', {path: '/'}, function () {
@@ -72,31 +90,47 @@ export default function lazyMap(container,application) {
           });
         }
       }
-      mapRoutes.call(this, routes[0].children);
+      mapRoutes.call(this, routes);
     });
   });
 }
 //TODO how to resolve routes with acl
-function filterRoutes(routes,acls){
+function filterRoutes(routes,acls,parent){
   var noPermittedRoutes = [];
   routes.forEach(function (route) {
     var children = route.children,
-      permission = acls.filterProperty('authCode', route.authCode),
-      isPermitted = permission.length == 1;
+      permission = acls.filterProperty('authCode', route.authCode);
+    if (permission.length > 1) {
+      Ember.assert('The route:' + route.name + ' has been granted duplicate permission with :' + permission.join(','));
+    }
+    var isPermitted = permission.length == 1;
+    if (parent && parent.localePath && !route.localePath) {
+      route.localePath = parent.localePath + '.' + route.template;
+    }
+    route.localePath = route.localePath || route.template;
+    if (!route.name) {
+      try{
+        route.name = t(route.localePath + '.name');
+      }catch(e){
+        route.name = route.template;
+      }
+    }
+
+
     acls.removeObjects(permission);
-    if(config.loggingDisabled && !isPermitted){
+    if(appConfig.loggingDisabled && !isPermitted){
       Ember.Logger.info(route.name + ' is not permitted');
     }
     //check if parent does not have permission ,does child should have?
     if (!isPermitted && route.authCode) {
       noPermittedRoutes.push(route);
-      if (config.strict === true) {
+      if (appConfig.strict === true) {
         Ember.Logger.info('The Permission has enable strict mode, does not have the permission with ' + route.name + ' and the cascade children');
         return;
       }
     }
     if (Ember.isArray(children) && children.length > 0) {
-      filterRoutes.call(null, children, acls);
+      filterRoutes.call(null, children, acls,route);
     }
   });
   routes.removeObjects(noPermittedRoutes);

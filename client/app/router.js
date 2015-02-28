@@ -27,19 +27,7 @@ var Router = Ember.Router.extend({
     return transition;
   },
   sidebarRoutes: function () {
-    var routes = filterRoutesByGroup(this.get('availableRoutes')[0].children, 'sidebar');
-    var localization = function (r) {
-      r.forEach(function (item) {
-        item.name = t('sidebar.' + item.template + '.name');
-        if (item.children && item.children.length>0) {
-          localization(item.children);
-        }
-      });
-    }
-    var container = this.container;
-    var t = container.lookup('utils:t');
-    localization(routes);
-    return routes;
+    return filterRoutesByGroup(this.get('availableRoutes'), 'sidebar');
   }.property('availableRoutes')
 });
 function filterRoutesByGroup(routes, group, parent) {
@@ -49,7 +37,7 @@ function filterRoutesByGroup(routes, group, parent) {
     routes.forEach(function (route) {
       if (route.group === group) {
         if (parent) {
-          route.template = parent + '.' + route.template
+          route.template = parent + '.' + route.template;
         }
         result.push(route);
         if (Ember.isArray(route.children) && route.children.length > 0) {

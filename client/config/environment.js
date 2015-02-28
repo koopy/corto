@@ -1,6 +1,6 @@
 /* jshint node: true */
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   var ENV = {
     modulePrefix: 'app',
     podModulePrefix: 'app/pods',
@@ -15,12 +15,13 @@ module.exports = function(environment) {
       'img-src': "'self'",
       'style-src': "'self' 'unsafe-inline'"
     },
-    'simple-auth':{
+    'simple-auth': {
       routeAfterAuthentication: 'main',
       routeIfAlreadyAuthenticated: 'main'
     },
     EmberENV: {
       FEATURES: {
+        'ember-document-title':true
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       }
@@ -29,7 +30,13 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      defaultLocale: 'en'
+      defaultLocale: 'en',
+      strict: true,
+      loggingDisabled: true,
+      enableAuth: true
+    },
+    SESSION: {
+      identification: 'username'
     }
   };
 
