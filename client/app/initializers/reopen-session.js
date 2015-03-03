@@ -1,12 +1,18 @@
 import Ember from 'ember';
 import Session from 'simple-auth/session';
 import lazyMap from 'app/utils/lazy-map';
+import Configuration from 'simple-auth/configuration';
 
 export function initialize(container, application) {
+  application.deferReadiness();
   Session.reopen({
     restore:function(){
       return this._super().then(function(){
         lazyMap(container,application,['sys:user:create_user','sys:user:delete_user']);
+      },function(){
+        var router = container.lookup('router:main');
+        router.set('initialURL',Configuration.authenticateRoute);
+        application.advanceReadiness();
       });
     },
     currentUser: function () {

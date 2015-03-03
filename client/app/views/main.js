@@ -11,7 +11,8 @@ export default Ember.View.extend({
   handleSideMenu:function(){
     var b = navigator.userAgent.match(/OS (5|6|7)(_\d)+ like Mac OS X/i);
     var a = Ember.$;
-    a(".nav-list").on(ace.click_event, function (h) {
+    var nav = a('.nav-list');
+    nav.on(ace.click_event, function (h) {
       var g = a(h.target).closest("a");
       if (!g || g.length == 0) {
         return;
@@ -25,7 +26,9 @@ export default Ember.View.extend({
       }else{
         b.removeClass('fa-caret-down').addClass('fa-caret-up');
       }
-    })
+    });
+    //slideMenu according to the current route
+    nav.find('a.active').parents('ul.submenu').show();
   },
   willDestroyElement:function(){
     this._super();
@@ -33,6 +36,5 @@ export default Ember.View.extend({
   },
   unbindEvent:function(){
     Ember.$('.nav-list').off(ace.click_event);
-  },
-
+  }
 });

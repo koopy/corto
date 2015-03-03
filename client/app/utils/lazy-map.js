@@ -93,6 +93,9 @@ export default function lazyMap(container,application) {
       mapRoutes.call(this, routes);
     });
   });
+  if(!Ember.BOOTED){
+    application.advanceReadiness();
+  }
 }
 //TODO how to resolve routes with acl
 function filterRoutes(routes,acls,parent){
