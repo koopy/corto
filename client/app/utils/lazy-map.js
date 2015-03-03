@@ -107,16 +107,20 @@ function filterRoutes(routes,acls,parent){
       Ember.assert('The route:' + route.name + ' has been granted duplicate permission with :' + permission.join(','));
     }
     var isPermitted = permission.length == 1;
-    if (parent && parent.localePath && !route.localePath) {
-      route.localePath = parent.localePath + '.' + route.template;
-    }
-    route.localePath = route.localePath || route.template;
-    if (!route.name) {
-      try{
-        route.name = t(route.localePath + '.name');
-      }catch(e){
-        route.name = route.template;
+    if (appConfig.enableI18n === true) {
+      if (parent && parent.localePath && !route.localePath) {
+        route.localePath = parent.localePath + '.' + route.template;
       }
+      route.localePath = route.localePath || route.template;
+      if (!route.name) {
+        try {
+          route.name = t(route.localePath + '.name');
+        } catch (e) {
+          route.name = route.template;
+        }
+      }
+    }  else{
+      route.name = route.template;
     }
 
 

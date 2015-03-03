@@ -33,7 +33,8 @@ module.exports = function (environment) {
       defaultLocale: 'en',
       strict: true,
       loggingDisabled: true,
-      enableAuth: true
+      enableAuth: true,
+      enableI18n: true
     },
     SESSION: {
       identification: 'username'
