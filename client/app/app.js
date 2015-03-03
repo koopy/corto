@@ -5,17 +5,18 @@ import config from './config/environment';
 import resolveWildcard from 'app/utils/resolve-wildcard';
 
 var locales = resolveWildcard('app/locales/*');
-locales = locales.names.map(function (item) {
-  var segments = item.split('/');
-  return segments[segments.length - 1];
-});
 //Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver: Resolver,
-  localeNames: locales
+  localeNames: Ember.computed(function () {
+    return locales.names.map(function (item) {
+      var segments = item.split('/');
+      return segments[segments.length - 1];
+    });
+  })
 });
 
 loadInitializers(App, config.modulePrefix);

@@ -14,12 +14,12 @@
                 </a>
                 <ul class="submenu">
                   {{#each sub in item.children}}
-                    {{#link-to sub.template tagName='li'}}
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-double-angle-right"></i>
-                            {{unbound sub.name}}
-                        </a>
-                    {{/link-to}}
+                    <li>
+                      {{#link-to sub.template class="dropdown-toggle"}}
+                          <i class="icon-double-angle-right"></i>
+                        {{unbound sub.name}}
+                      {{/link-to}}
+                    </li>
                   {{/each}}
                 </ul>
             </li>

@@ -21,9 +21,9 @@ module.exports = function (environment) {
     },
     EmberENV: {
       FEATURES: {
-        'ember-document-title':true
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
+        'ember-document-title':true
       }
     },
 

@@ -4,14 +4,49 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 import Configuration from 'simple-auth/configuration';
 
 var DIALOG = 'dialog',
+  separator = ' - ',
   get  = Ember.get,
   a_slice = [].slice;
-
+var t = null;
 export default
 Ember.Route.extend(ApplicationRouteMixin,{
+  title: function(tokens){
+    /**
+     * t('platform')  or t('platform.name')
+     *
+     * TODO the route meta is diff from the route define
+     * does need to redefine it?
+     *
+     */
+    var segments = [];
+    if(Ember.FEATURES.isEnabled('ember-document-title')){
+      tokens = tokens.uniq().pop().split('.');
+      if (tokens[tokens.length - 1] == 'index') {
+        tokens.pop();
+      }
+      if (tokens[0] == 'main') {
+        tokens.shift();
+      }
+      //filter main
+      for (var i = 0, l = tokens.length; i < l; i++) {
+        var seg = tokens.slice(0, i + 1);
+        try {
+          seg.push('name');
+          segments.push(t(seg.join('.')));
+        } catch (e) {
+          seg.pop('name');
+          segments.push(t(seg.join('.')));
+          continue;
+        }
+      }
+    }
+    segments.unshift(t('title'));
+    return segments.join(separator);
+  },
   dialogs: null,
   init:function(){
     this._super();
+    t = this.container.lookup('utils:t');
     this.set('dialogs',Ember.A());
   },
   pathForDialog:function(yieldName){

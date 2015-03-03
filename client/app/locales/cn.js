@@ -1,4 +1,5 @@
 var locale = {
+  title: '金融同业平台',
   platform: {
     name: '平台管理',
     sysUsers: {
@@ -60,6 +61,7 @@ var locale = {
     logout:'登出'
   },
   login: {
+    name:'登陆',
     rememberme:'记住我',
     forgetpwd:'忘记密码',
     submit:'登陆平台'

@@ -1,4 +1,5 @@
 var locale = {
+  title: 'Financial trade platform',
   platform: {
     name: 'Platform',
     sysUsers: {
@@ -57,6 +58,7 @@ var locale = {
     logout:'Logout'
   },
   login: {
+    name:'Login',
     rememberme:'Remember me',
     forgetpwd:'Forget Password',
     submit:'Login'
