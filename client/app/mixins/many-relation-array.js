@@ -9,7 +9,7 @@ var a_slice = [].slice,
 export
 
 function createMixin(model,relationModel) {
-  var identity = model.columns.config.identity;
+  var identity = model.config.identity;
   var modelName = model.typeKey;
   Ember.assert('The model :' + model + ' must config the identity with field and name', identity && identity.field && identity.name);
 
@@ -101,7 +101,7 @@ function buildColumns(identity,contentPath){
     headerCellName: '操作',
     columnWidth: 100,
     textAlign: "text-align-center",
-    tableCellViewClass: 'operation-cell'
+    tableCellViewClass: 'grid-operations/detail'
   })];
   return ret;
 }

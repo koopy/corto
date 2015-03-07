@@ -3,10 +3,58 @@ var locale = {
   platform: {
     name: 'Platform',
     sysUsers: {
-      name: 'User'
+      name: 'User',
+      columns: {
+        name: 'Name',
+        account: 'Account',
+        officePhone: 'Office Phone'
+      },
+      create: {
+        name: 'Create User'
+      },
+      sysUser:{
+        name: 'Detail',
+        detail: {
+          name: 'Detail Info',
+          profile: {
+            name: 'Basic Info'
+          },
+          roleAllocation: {
+            name: 'Role Allocation'
+          },
+          organization: {
+            name: 'Organization'
+          }
+        },
+        edit: {
+          name: 'Edit'
+        }
+      }
     },
     sysRoles: {
-      name: 'Role'
+      name: 'Role',
+      columns: {
+        name: 'Name',
+        description:'Description'
+      },
+      sysRole:{
+        name: 'Detail',
+        detail: {
+          name: 'Detail Info',
+          profile: {
+            name: 'Basic Info'
+          },
+          roleAllocation: {
+            name: 'Role Allocation'
+          },
+          resourceAuthorization: {
+            name: 'Resource Authorization'
+          }
+        },
+        edit: {
+          name: 'Edit'
+        }
+      }
     },
     sysDuties: {
       name: 'Duty'

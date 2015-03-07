@@ -10,20 +10,18 @@ var config = {
       group: 'sidebar',
       children: [
         {
-          name: '创建用户',
           template: 'create',
           type: 'route',
           authCode: 'sys:user:create_user'
         },
         {
-          name: '用户详情',
           template: 'sysUser',
           path: '/:sysUser_id',
           authCode: '',
           children: [
             {
               name:'detail',
-              template:'detail',
+              template: 'detail',
               path:'/',
               authCode:'',
               children:[{
@@ -42,7 +40,6 @@ var config = {
               }]
             },
             {
-              name: '编辑用户',
               template: 'edit',
               type: 'route',
               authCode: 'sys:user:update_user'
@@ -129,22 +126,39 @@ var config = {
       group: 'sidebar',
       children: [
         {
-          name: '创建角色',
           template: 'create',
           type: 'route',
           authCode: 'sys:role:create_role'
         },
         {
-          name: '角色详情',
           template: 'sysRole',
           path: '/:sysRole_id',
           authCode: '',
           children: [
             {
-              name: '编辑角色',
+              name:'detail',
+              template: 'detail',
+              path:'/',
+              authCode:'',
+              children:[{
+                name:'profile',
+                template:'profile',
+                path:'/',
+                authCode:''
+              },{
+                name:'resourceAuthorization',
+                template:'resourceAuthorization',
+                authCode:''
+              },{
+                name:'roleAllocation',
+                template:'roleAllocation',
+                authCode:''
+              }]
+            },
+            {
               template: 'edit',
               type: 'route',
-              authCode: 'sys:role:update_role'
+              authCode: 'sys:user:update_role'
             }
           ]
         }

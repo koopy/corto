@@ -1,0 +1,29 @@
+{
+  "name": "sysRole",
+  "base": "PersistedModel",
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "string"
+    },
+    "modifier": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

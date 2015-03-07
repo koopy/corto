@@ -28,7 +28,9 @@ export default Ember.View.extend({
       }
     });
     //slideMenu according to the current route
-    nav.find('a.active').parents('ul.submenu').show();
+    nav.find('a.active').
+      parents('ul.submenu').
+      show();
   },
   willDestroyElement:function(){
     this._super();

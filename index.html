@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script type="text/javascript">
+    function binarySearch(array, target) {
+      var count = 0;
+      var left = 0, right = array.length;
+      while (left <= right) {
+        count++;
+        var center = Math.floor((left + right) / 2);
+        if (array[center] == target) {
+          return [center, count];
+        }
+        if (target < array[center]) {
+          right = center - 1;
+        } else {
+          left = center + 1;
+        }
+      }
+    }
+
+    var matrix = [];
+    var target;
+    for (var i = 0; i < 10000; i++) {
+      var tmp = [];
+      var last;
+      if (matrix[i - 1]) {
+        last = matrix[i - 1][matrix[i - 1].length - 1];
+      } else {
+        last = 0;
+      }
+      for (var j = 0; j < 10; j++) {
+        tmp.push(last + i + j);
+      }
+      matrix.push(tmp);
+    }
+    var target = matrix[9999][9999];
+    var time = new Date();
+    function oneBinary(array) {
+      var count = 0;
+      for (var i = 0, l = array.length; i < l; i++) {
+        var cur = array[i];
+        var left = 0, right = cur.length;
+        while (left <= right) {
+          count++;
+          var center = Math.floor((left + right) / 2);
+          if (target > cur[right == 1 ? 1 : right - 1]) {
+            break;
+          }
+          if (cur[center] == target) {
+            return [i, center, count];
+          }
+
+          if (target < cur[center]) {
+            right = center - 1;
+          } else {
+            left = center + 1;
+          }
+        }
+      }
+    }
+    var result = oneBinary(matrix, target);
+    console.log("point:" + result[0] + "," + result[1] + " oneBinary:" + (new Date() - time) / 1000 + ",count:" + result[2]);
+
+    var time2 = new Date();
+    var count = 0;
+    function allBinary() {
+      var left = 0, right = matrix.length;
+      while (left <= right) {
+        count++;
+        var center = Math.floor((left + right) / 2);
+        var cur = matrix[center];
+        var first = cur[0];
+        var last = cur[cur.length - 1];
+        if (target >= first && target <= last) {
+          var y = binarySearch(cur, target);
+          return [center, y[0], y[1]];
+        }
+        if (target < cur[cur.length - 1]) {
+          right = center - 1;
+        } else {
+          left = center + 1;
+        }
+
+      }
+    }
+    var result = allBinary(matrix, target);
+    console.log("point:" + result[0] + "," + result[1] + " allBinary:" + (new Date() - time2) / 1000 + ",count:" + result[2]);
+
+
+    var time3 = new Date();
+    var count = 0;
+    function normal(array, target) {
+      var count = 0;
+      for (var i = 0, l = array.length; i < l; i++) {
+        var cur = matrix[i];
+        for (var j = 0, x = cur.length; j < x; j++) {
+          count++;
+          if (cur[j] == target) {
+            return [i, j, count];
+          }
+        }
+      }
+    }
+    var result = normal(matrix, target);
+    console.log("point:" + result[0] + "," + result[1] + " Normal:" + (new Date() - time3) / 1000 + ",count:" + result[2]);
+
+    var filter = {
+      name: 'jwy',
+      and: [
+        {
+          age: {
+            gt: 23
+          }
+        },
+        {
+          nickname: {
+            like: 'jwy'
+          }
+        }
+      ]
+    };
+  </script>
+</head>
+<body>
+
+</body>
+</html>

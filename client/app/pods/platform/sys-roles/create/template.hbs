@@ -1,0 +1,93 @@
+<div class='page-header'>
+    <h4 class='smaller blue'>
+        <button {{action 'back'}} class='btn btn-xs btn-info' style='margin:0 10px 0 0;'>
+            <i class='icon-mail-reply'></i>
+            返 回
+        </button>
+        <b class='middle'>新建用户</b>							</h4>
+</div>
+<div class='row'>
+
+    <div class='col-sm-12'>
+        <div class='user-profile row'>
+            <div class='col-sm-offset-1 col-sm-10'>
+              {{#form-for model wrapper="bootstrap"}}
+                  <div class='tabbable'>
+                      <div class='tab-content profile-edit-tab-content'>
+
+                          <div id='edit-password' class='tab-pane in active'>
+                              <div class='space-10'></div>
+
+
+                            {{input name label='用户名'  placeholder=''}}
+
+
+
+                            {{input password label='密码' placeholder='' as='password'}}
+
+
+
+                            {{input account label='账号'  placeholder=''}}
+
+
+
+                            {{input sex label='性别' placeholder='' as='radio'}}
+
+
+
+                            {{input email label='邮箱' placeholder='' as='email'}}
+
+
+
+                            {{input phone label='手机号码'  placeholder=''}}
+
+
+
+                            {{input officePhone label='办公室电话'  placeholder=''}}
+
+
+
+                            {{input status label='状态' placeholder='' as='radio'}}
+
+
+
+                            {{input homePhone label='家庭电话'  placeholder=''}}
+
+
+
+                            {{input mobile label='手机'  placeholder=''}}
+
+
+
+                            {{input address label='家庭地址'  placeholder=''}}
+
+
+
+                            {{input description label='描述' placeholder='' as='textarea'}}
+
+
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class='clearfix form-actions'>
+                      <div class='col-md-offset-6 col-md-3'>
+                          <button {{action "back"}} class='btn' type='reset'>
+                              <i class='icon-undo bigger-110'></i>
+                              取消											</button>
+
+                          <!--<button class='btn btn-info' type='button' style='margin-left:10px;'>-->
+                          <!--<i class='icon-ok bigger-110'></i>-->
+                          <!--确定											</button>-->
+                        {{#submit '确定' class='btn btn-primary'}}
+                            <i class='icon-ok bigger-110'></i>
+                            确定
+                        {{/submit}}
+                          &nbsp; &nbsp;
+                      </div>
+                  </div>
+              {{/form-for}}
+            </div>
+        </div>
+    </div>
+</div>

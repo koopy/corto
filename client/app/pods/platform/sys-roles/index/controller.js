@@ -3,10 +3,10 @@
  */
 import Ember from 'ember';
 import PagedArray from 'app/mixins/paged-array';
-import SysUser from 'app/models/sys-user';
+import SysRole from 'app/models/sys-role';
 
 export default
-Ember.ArrayController.extend(PagedArray(SysUser),{
+Ember.ArrayController.extend(PagedArray(SysRole),{
   actions:{
     create:function(){
       this.store.filter('sysDict',function(dict){
@@ -14,10 +14,10 @@ Ember.ArrayController.extend(PagedArray(SysUser),{
       }).then(function(result){
           console.log(result);
         });
-      this.transitionToRoute('platform.sysUsers.create');
+      this.transitionToRoute('platform.sysRoles.create');
     },
     detail: function (model) {
-      this.transitionToRoute('platform.sysUsers.sysUser.detail', model);
+      this.transitionToRoute('platform.sysRoles.sysRole.detail', model);
     }
   }
 });

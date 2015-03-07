@@ -25,13 +25,13 @@ function findRouteMap(path, routeMaps) {
     var segment = path.split('.');
     for (var k = 0, kl = segment.length; k < kl; k++) {
       var currentPath = segment[k];
-      if (currentPath == 'index') {
+      if (['main', 'index'].indexOf(currentPath) > -1) {
         continue;
       }
       if (currentPath == 'loading') {
+        //TODO loading i18n
         ret.push({
-          routeName: 'loading',
-          name: '加载中'
+          name: 'loading'
         });
         continue;
       }
@@ -39,17 +39,13 @@ function findRouteMap(path, routeMaps) {
       for (var i = 0, l = cache.length; i < l; i++) {
         var cur = cache[i];
         if (cur[identifier] == currentPath) {
-          //TODO 详细信息如何映射
           ret.push({
-            routeName: currentPath,
-            name: cur.name || exp[currentPath] || currentPath
+            name: cur.name
           });
           if (cur.children && cur.children.length > 0) {
             cache = cur.children;
           }
           break;
-          //TODO does it need other meta data
-          //TODO how to resolve un matched
         }
       }
     }
@@ -64,7 +60,8 @@ export default Ember.Controller.extend({
       availableRoutes = this.get('target.availableRoutes'),
       breads = [];
     if (Ember.isArray(availableRoutes) && availableRoutes.length > 0) {
-      breads = findRouteMap(currentPath, availableRoutes[0].children);
+      //TODO push routes into root
+      breads = findRouteMap(currentPath, availableRoutes);
     }
     return breads;
   }.property('controllers.application.currentPath', 'target.availableRoutes'),

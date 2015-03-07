@@ -3,10 +3,58 @@ var locale = {
   platform: {
     name: '平台管理',
     sysUsers: {
-      name: '用户管理'
+      columns: {
+        name: '用户名',
+        account: '账号',
+        officePhone: '办公室电话'
+      },
+      name: '用户管理',
+      create: {
+        name: '创建用户'
+      },
+      sysUser:{
+        name: '详情',
+        detail: {
+          name: '详情信息',
+          profile: {
+            name: '基本信息'
+          },
+          roleAllocation: {
+            name: '角色分配'
+          },
+          organization: {
+            name: '组织管理'
+          }
+        },
+        edit: {
+          name: '编辑用户'
+        }
+      }
     },
     sysRoles: {
-      name: '角色管理'
+      columns: {
+        name: '角色名',
+        description:'描述'
+      },
+      name: '角色管理',
+      sysRole:{
+        name: '详情',
+        detail: {
+          name: '详情信息',
+          profile: {
+            name: '基本信息'
+          },
+          roleAllocation: {
+            name: '角色分配'
+          },
+          resourceAuthorization: {
+            name: '资源授权'
+          }
+        },
+        edit: {
+          name: '编辑用户'
+        }
+      }
     },
     sysDuties: {
       name: '职务管理'

@@ -31,8 +31,9 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       defaultLocale: 'en',
+      //auth cascade flag
       strict: true,
-      loggingDisabled: true,
+      loggingEnabled: true,
       enableAuth: true,
       enableI18n: true
     },

@@ -4,21 +4,21 @@
             <i class="icon-mail-reply"></i>
             返 回
         </button>
-        <b class="middle">{{username}}</b>							</h4>
+        <b class="middle">{{name}}</b>							</h4>
 </div>
 <div class="row">
 
     <div class="col-sm-12 widget-container-span">
         <div class="tabbable">
             <ul class="nav nav-tabs" id="myTab">
-              {{#link-to 'platform.sysUsers.sysUser.detail.profile' tagName='li'}}
-                  <a>{{t 'platform.sysUsers.sysUser.detail.profile.name'}}</a>
+              {{#link-to 'platform.sysRoles.sysRole.detail.profile' tagName='li'}}
+                  <a>{{t 'platform.sysRoles.sysRole.detail.profile.name'}}</a>
               {{/link-to}}
-              {{#link-to 'platform.sysUsers.sysUser.detail.roleAllocation' tagName='li'}}
-                  <a>{{t 'platform.sysUsers.sysUser.detail.roleAllocation.name'}}</a>
+              {{#link-to 'platform.sysRoles.sysRole.detail.roleAllocation' tagName='li'}}
+                  <a>{{t 'platform.sysRoles.sysRole.detail.roleAllocation.name'}}</a>
               {{/link-to}}
-              {{#link-to 'platform.sysUsers.sysUser.detail.organization' tagName='li'}}
-                  <a>{{t 'platform.sysUsers.sysUser.detail.organization.name'}}</a>
+              {{#link-to 'platform.sysRoles.sysRole.detail.resourceAuthorization' tagName='li'}}
+                  <a>{{t 'platform.sysRoles.sysRole.detail.resourceAuthorization.name'}}</a>
               {{/link-to}}
             </ul>
             <div class="tab-content padding-0">

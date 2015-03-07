@@ -54,15 +54,11 @@
     "dataSource": "db",
     "public": true
   },
-  "physician": {
-    "dataSource": "db",
-    "public": true
-  },
-  "patient": {
-    "dataSource": "db",
-    "public": true
-  },
   "sysAcl": {
+    "dataSource": "db",
+    "public": true
+  },
+  "sysRole": {
     "dataSource": "db",
     "public": true
   }

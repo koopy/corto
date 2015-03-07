@@ -16,7 +16,10 @@ function normalizeAcl(acls){
 }
 acls = normalizeAcl(acls);
 /**
+ * i18n:
+ *  cn: use route/template if localePath can't find
  * field:{
+ * name://if not support ,use localPath
  * route/template
  * authCode
  * group
@@ -40,7 +43,6 @@ var routemetas = resolveWildcard('app/routemetas/*').modules;
  * @param application
  */
 var t = null;
-var lang = null;
 export default function lazyMap(container,application) {
   //TODO last args : acl ,get from the backend
   var session = container.lookup('simple-auth-session:main');
@@ -50,7 +52,6 @@ export default function lazyMap(container,application) {
   if(!t){
     t = container.lookup('utils:t');
   }
-  lang = app.get('locale')|| app.get('defaultLocale');
   //TODO make field :username config
   //TODO how to do when the user has no any permission
   Ember.assert('currentUser : ' + currentUser.get('username') + ' does not have  any permission', acls || (Ember.isArray(acls) && acls.length == 0));
@@ -107,28 +108,29 @@ function filterRoutes(routes,acls,parent){
       Ember.assert('The route:' + route.name + ' has been granted duplicate permission with :' + permission.join(','));
     }
     var isPermitted = permission.length == 1;
-    if (appConfig.enableI18n === true) {
-      if (parent && parent.localePath && !route.localePath) {
-        route.localePath = parent.localePath + '.' + route.template;
-      }
-      route.localePath = route.localePath || route.template;
-      if (!route.name) {
+    if(!route.name){
+      if (appConfig.enableI18n === true) {
+        if (parent && parent.localePath && !route.localePath) {
+          //join with parent
+          route.localePath = parent.localePath + '.' + route.template;
+        }
+        route.localePath = route.localePath || route.template;
         try {
           route.name = t(route.localePath + '.name');
         } catch (e) {
-          route.name = route.template;
+          //Do nothing
         }
       }
-    }  else{
-      route.name = route.template;
+      route.name = route.name || route.template;
     }
 
-
     acls.removeObjects(permission);
-    if(appConfig.loggingDisabled && !isPermitted){
+    if(appConfig.loggingEnabled && !isPermitted){
       Ember.Logger.info(route.name + ' is not permitted');
     }
     //check if parent does not have permission ,does child should have?
+    //some route has no config the authCode
+    //if not permitted and the authCode is not null
     if (!isPermitted && route.authCode) {
       noPermittedRoutes.push(route);
       if (appConfig.strict === true) {
@@ -140,6 +142,7 @@ function filterRoutes(routes,acls,parent){
       filterRoutes.call(null, children, acls,route);
     }
   });
+  //keep all level route just clear not permitted routes
   routes.removeObjects(noPermittedRoutes);
   return routes;
 }
