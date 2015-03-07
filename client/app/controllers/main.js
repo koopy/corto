@@ -53,6 +53,7 @@ function findRouteMap(path, routeMaps) {
   return ret;
 }
 
+//TODO hwo to resolve dynamic route
 export default Ember.Controller.extend({
   needs: ['application'],
   breadcrumbs: function () {
@@ -60,7 +61,6 @@ export default Ember.Controller.extend({
       availableRoutes = this.get('target.availableRoutes'),
       breads = [];
     if (Ember.isArray(availableRoutes) && availableRoutes.length > 0) {
-      //TODO push routes into root
       breads = findRouteMap(currentPath, availableRoutes);
     }
     return breads;

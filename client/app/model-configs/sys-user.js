@@ -7,20 +7,23 @@ import commonColumn from '../metadatas/common-column';
 //TODO refactor model column config to other folder and refactor blueprint
 var config = {
   /*详细信息配置项，一定要配置在这里*/
+  columnOptions: {
+    localizePrefix: 'platform.sysUsers.columns'
+  },
   identity: {
-    field: "name",
-    name: "用户"
+    field: 'name',
+    name: '用户'
   },
   detail: {
     profile: {
-      name: "基本信息",
+      name: '基本信息',
       active: true
     },
     roleAllocation: {
-      name: "角色分配"
+      name: '角色分配'
     },
     organization: {
-      name: "组织信息"
+      name: '组织信息'
     }
   }
 };
@@ -28,7 +31,7 @@ var columns = {
   checkbox: {
     disableLocale: true,
     columnWidth: '10%',
-    textAlign: "text-align-center",
+    textAlign: 'text-align-center',
     headerCellViewClass: 'checkbox-header',
     tableCellViewClass: 'checkbox-cell'
   },
@@ -113,6 +116,7 @@ var columns = {
     }
   }
 };
+
 
 Ember.merge(columns, commonColumn);
 export

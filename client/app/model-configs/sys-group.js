@@ -6,34 +6,36 @@ import commonColumn from '../metadatas/common-column';
 
 //TODO refactor model column config to other folder and refactor blueprint
 var config = {
-  identity:{
-    field:"name",
-    name:"群组"
+  columnOptions: {
+    localizePrefix: 'platform.sysGroups.columns'
+  },
+  identity: {
+    field: 'name',
+    name: '群组'
   },
   detail:{
     profile: {
-      name: "基本信息",
+      name: '基本信息',
       active:true
     },
     groupMember: {
-      name: "群组成员"
+      name: '群组成员'
     }
   }
 };
 var columns = {
   checkbox: {
+    disableLocale: true,
     columnWidth: 50,
     textAlign: 'text-align-center',
     headerCellViewClass: 'checkbox-header',
     tableCellViewClass: 'checkbox-cell'
   },
   code: {
-    headerCellName: '群组代码',
     columnWidth: 100,
     contentPath: 'code'
   },
   name: {
-    headerCellName: '群组名称',
     columnWidth: 100,
     contentPath: 'name'
   },

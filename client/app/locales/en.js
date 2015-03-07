@@ -60,7 +60,11 @@ var locale = {
       name: 'Duty'
     },
     sysGroups: {
-      name: 'Group'
+      name: 'Group',
+      columns: {
+        name: 'Name',
+        code: 'Code'
+      }
     },
     sysOrgs: {
       name: 'Organization'

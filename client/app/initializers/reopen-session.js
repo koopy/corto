@@ -11,7 +11,7 @@ export function initialize(container, application) {
         lazyMap(container,application,['sys:user:create_user','sys:user:delete_user']);
       },function(){
         var router = container.lookup('router:main');
-        router.set('initialURL',Configuration.authenticateRoute);
+        router.set('initialURL',Configuration.authenticationRoute);
         application.advanceReadiness();
       });
     },

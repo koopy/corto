@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import ColumnDefinition from 'ember-cli-ember-table/column-definition';
-import applyTransforms from '../utils/apply-transforms';
 
 var get = Ember.get;
 
@@ -52,45 +50,7 @@ function createMixin(model) {
       this.get('selection').clear();
     }.observes('page'),
     columns: function () {
-      var t = this.container.lookup('utils:t');
-      var currentPath = this.container.lookup('controller:application').get('currentPath');
-      currentPath = currentPath.split('.');
-      currentPath.shift();
-      currentPath.pop();
-      currentPath.push('columns');
-      currentPath = currentPath.join('.');
-
-      var modelColumns = model.columns;
-      Ember.assert('The Model : ' + model + 'does not config columns', modelColumns);
-      var ret = [];
-      for (var fieldName in modelColumns) {
-        var column = modelColumns[fieldName];
-        if (column.isVisible === false || fieldName === "detail") {
-          continue;
-        }
-        var columnWidth = column.columnWidth;
-        if (columnWidth <= 0 || !columnWidth) {
-          column.columnWidth = 100;
-        }
-        if (!column.contentPath) {
-          column.contentPath = fieldName;
-        }
-        if (!column.headerCellName && !column.disableLocale) {
-          //TODO platform.sysUsers.columns.fieldName
-          column.headerCellName = t(currentPath + '.' + fieldName);
-        }
-
-        if (!column.getCellContent) {
-          var dataType = column.dataType;
-          column.getCellContent = (function (fieldName, dataType) {
-            return  function (row) {
-              return applyTransforms(dataType || 'string', row.get(fieldName));
-            };
-          })(fieldName,dataType);
-        }
-        ret.push(ColumnDefinition.create(column));
-      }
-      return ret;
+      return model.columnDefinitions;
     }.property(),
     actions: {
       delBatch: function (modalName) {

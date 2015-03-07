@@ -95,7 +95,7 @@ Ember.Route.extend(ApplicationRouteMixin,{
       Ember.sendEvent(controller,'open',[modelType]);
 
       var sender = a_slice.call(arguments, -1)[0];
-      if (sender && get('sender', 'asSender') === true){
+      if (sender && get(sender, 'asSender') === true){
         controller.set('triggerSource',sender);
       }
       var dialogs = this.get('dialogs');

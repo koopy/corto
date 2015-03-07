@@ -6,23 +6,26 @@ import commonColumn from '../metadatas/common-column';
 
 //TODO refactor model column config to other folder and refactor blueprint
 var config = {
-    identity:{
-      field:"name",
-      name:"岗位"
+  columnOptions: {
+    localizePrefix: 'platform.sysPositions.columns'
+  },
+  identity: {
+    field: 'name',
+    name: '岗位'
+  },
+  detail: {
+    profile: {
+      name: '基本信息',
+      active: true
     },
-    detail:{
-      profile: {
-        name: "基本信息",
-        active:true
-      },
-      groupMember: {
-        name: "岗位成员"
-      }
+    groupMember: {
+      name: '岗位成员'
     }
+  }
 };
 var columns = {
   checkbox: {
-    disableLocale:true,
+    disableLocale: true,
     columnWidth: 50,
     textAlign: 'text-align-center',
     headerCellViewClass: 'checkbox-header',
@@ -49,6 +52,7 @@ var columns = {
     contentPath: 'status'
   }
 };
+
 
 Ember.merge(columns, commonColumn);
 export

@@ -12,7 +12,7 @@ var locale = {
       create: {
         name: '创建用户'
       },
-      sysUser:{
+      sysUser: {
         name: '详情',
         detail: {
           name: '详情信息',
@@ -34,10 +34,10 @@ var locale = {
     sysRoles: {
       columns: {
         name: '角色名',
-        description:'描述'
+        description: '描述'
       },
       name: '角色管理',
-      sysRole:{
+      sysRole: {
         name: '详情',
         detail: {
           name: '详情信息',
@@ -60,7 +60,11 @@ var locale = {
       name: '职务管理'
     },
     sysGroups: {
-      name: '群组管理'
+      name: '群组管理',
+      columns: {
+        name: '群组名称',
+        code: '群组代码'
+      }
     },
     sysOrgs: {
       name: '组织管理'
@@ -104,15 +108,23 @@ var locale = {
   },
   home: {
     title: '欢迎',
-    settings:'设置',
-    profile:'个人信息',
-    logout:'登出'
+    settings: '设置',
+    profile: '个人信息',
+    logout: '登出'
   },
   login: {
-    name:'登陆',
-    rememberme:'记住我',
-    forgetpwd:'忘记密码',
-    submit:'登陆平台'
+    name: '登陆',
+    rememberme: '记住我',
+    forgetpwd: '忘记密码',
+    submit: '登陆平台'
+  },
+  dialogs: {
+    confirm: {
+      del: {
+
+      }
+
+    }
   }
 };
 export default

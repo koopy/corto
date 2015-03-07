@@ -4,11 +4,12 @@ import PagedRemoteArray from 'ember-cli-pagination/remote/paged-remote-array';
 import Util from 'ember-cli-pagination/util';
 
 var a_slice = [].slice,
+  get = Ember.get,
   Promise = Ember.RSVP.Promise;
 
 export
-
 function createMixin(model,relationModel) {
+  var columns = model.columns;
   var identity = model.config.identity;
   var modelName = model.typeKey;
   Ember.assert('The model :' + model + ' must config the identity with field and name', identity && identity.field && identity.name);
@@ -49,7 +50,18 @@ function createMixin(model,relationModel) {
       this.set('content', PagedRemoteArray.create(mainOps));
     }.on('enter'),
     columns: function () {
-      return buildColumns(identity, modelName + '.' + identity.field);
+      var copyed = Ember.copy(columns, true);
+      var subset = model.subset.map(function (f) {
+        var col = get(copyed, f);
+        Ember.assert('Can not get the column with field :', f);
+        if (f == identity.field) {
+          col.contentPath = modelName + '.' + f;
+        }
+        return col;
+      });
+      return subset.map(function(item){
+        return ColumnDefinition.create(item);
+      });
     }.property(),
     page: 1,
     perPage: 10,
@@ -87,25 +99,6 @@ function createMixin(model,relationModel) {
   });
 }
 
-function buildColumns(identity,contentPath){
-  var ret = [ColumnDefinition.create({
-    columnWidth: 50,
-    textAlign: "text-align-center",
-    headerCellViewClass: 'checkbox-header',
-    tableCellViewClass: 'checkbox-cell'
-  }), ColumnDefinition.create({
-    columnWidth: 100,
-    headerCellName: identity.name + '名称',
-    contentPath: contentPath
-  }), ColumnDefinition.create({
-    headerCellName: '操作',
-    columnWidth: 100,
-    textAlign: "text-align-center",
-    tableCellViewClass: 'grid-operations/detail'
-  })];
-  return ret;
-}
-
 function ManyRelationArray(model,relationModel) {
   Ember.assert('ManyRelationArray Mixin must provide the corresponding model', model);
   Ember.assert('ManyRelationArray Mixin must provide the relationModel', relationModel);
@@ -114,6 +107,5 @@ function ManyRelationArray(model,relationModel) {
 }
 
 export {
-  ManyRelationArray,
-  buildColumns
+  ManyRelationArray
 }

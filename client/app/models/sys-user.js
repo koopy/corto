@@ -1,6 +1,5 @@
 import DS from 'ember-data';
 import Base from './base';
-import {columns,config} from '../model-configs/sys-user';
 
 var attr = DS.attr,
  belongsTo = DS.belongsTo,
@@ -40,7 +39,5 @@ var Model = Base.extend({
     }
   }
 });
-Model.columns = columns;
-Model.config = config;
 export default
 Model;

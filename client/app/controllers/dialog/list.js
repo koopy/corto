@@ -5,12 +5,7 @@ import Ember from 'ember';
 import ColumnDefinition from 'ember-cli-ember-table/column-definition';
 import ExcludePagedArray from 'app/mixins/exclude-paged-array';
 import Util from 'ember-cli-pagination/util';
-import
-{
-  buildColumns
-}
-from
-'app/mixins/many-relation-array';
+
 export default
 Ember.Controller.extend(Ember.PromiseProxyMixin,{
   init: function () {
@@ -58,10 +53,8 @@ Ember.Controller.extend(Ember.PromiseProxyMixin,{
     this.set('content', ExcludePagedArray.create(mainOps));
   }.on('open'),
   columns: function () {
-    var modelType = this.get('modelType');
-    var identity = modelType.columns.config.identity;
-    var contentPath = identity.field;
-    return buildColumns(identity, contentPath);
+    var model = this.get('modelType');
+    return model.subsetDefinitions;
   }.property('modelType'),
 
   triggerSource: null,
