@@ -1,46 +1,44 @@
-<div class="col-sm-6">
-    <div class="accordion-style1 panel-group">
-        <div class="panel panel-default">
-            <div class="panel-heading accordion-toggle">
-                <h4 class="panel-title"><a href="#" class="accordion-toggle">岗位</a></h4>
-            </div>
-            <div class="panel-collapse in">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="table-responsive panel-body widget-main padding-0">
-                            <div class="dataTables_wrapper">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div id="sample-table-2_length" class="dataTables_length">
-                                            <label><input type="text" aria-controls="sample-table-2" placeholder="搜索 ..."></label>
-                                        </div>
+<div class="accordion-style1 panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading accordion-toggle">
+            <h4 class="panel-title"><a href="#" class="accordion-toggle">岗位</a></h4>
+        </div>
+        <div class="panel-collapse in">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive panel-body widget-main padding-0">
+                        <div class="dataTables_wrapper">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div id="sample-table-2_length" class="dataTables_length">
+                                        <label><input type="text" aria-controls="sample-table-2" placeholder="搜索 ..."></label>
                                     </div>
-                                    <div class="col-sm-6">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="dataTables_filter" id="sample-table-2_filter">
                                         <div class="dataTables_filter" id="sample-table-2_filter">
-                                            <div class="dataTables_filter" id="sample-table-2_filter">
-                                                <button {{action 'openModal' 'list' modelType}} class="btn btn-white" data-toggle="modal" data-target="#myModal">
-                                                    <i class="icon-plus-sign purple align-top bigger-125"></i>
-                                                    添加																						</button>
-                                                <button class="btn btn-white">
-                                                    <i class="icon-trash red align-top bigger-125"></i>
-                                                    批量删除																						</button>
-                                            </div>
+                                            <button {{action 'openModal' 'list' modelType}} class="btn btn-white" data-toggle="modal" data-target="#myModal">
+                                                <i class="icon-plus-sign purple align-top bigger-125"></i>
+                                                添加																						</button>
+                                            <button class="btn btn-white">
+                                                <i class="icon-trash red align-top bigger-125"></i>
+                                                批量删除																						</button>
                                         </div>
                                     </div>
                                 </div>
-                              {{ember-table
-                              hasFooter=false
-                              enableContentSelection=true
-                              selectionMode="multiple"
-                              columns=columns
-                              content=content
-                              }}
-                              {{page-numbers content=content}}
                             </div>
+                          {{ember-table
+                          hasFooter=false
+                          enableContentSelection=true
+                          selectionMode="multiple"
+                          columns=columns
+                          content=content
+                          }}
+                          {{page-numbers content=content}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div><!-- /span -->
+</div>

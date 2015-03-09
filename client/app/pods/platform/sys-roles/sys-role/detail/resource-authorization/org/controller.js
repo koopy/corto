@@ -5,11 +5,11 @@ import
 }
 from
 'app/mixins/many-relation-array';
-import SysGroup from 'app/models/sys-group';
+import SysOrg from 'app/models/sys-org';
 import SysRoleRelation from 'app/models/sys-role-relation';
 import SenderAction from 'app/mixins/sender-action';
 
 export default
-Ember.Controller.extend(ManyRelationArray(SysGroup,SysRoleRelation),SenderAction, {
+Ember.Controller.extend(ManyRelationArray(SysOrg,SysRoleRelation),SenderAction, {
 
 });

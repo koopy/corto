@@ -4,8 +4,7 @@ import Relation from './relation';
 var attr = DS.attr,
   belongsTo = DS.belongsTo,
   hasMany = DS.hasMany;
-export default
-Relation.extend({
+export default DS.Model.extend({
   principalType: attr(),
   principalId: attr(),
   objectId: attr(),

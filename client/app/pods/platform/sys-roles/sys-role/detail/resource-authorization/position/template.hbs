@@ -1,13 +1,17 @@
-<div class="col-sm-6">
-    <div class="accordion-style1 panel-group">
-        <div class="panel panel-default">
-            <div class="panel-heading accordion-toggle">
-                <h4 class="panel-title"><a href="#" class="accordion-toggle">岗位</a></h4>
-            </div>
-            <div class="panel-collapse in">
+<div id="accordion" class="accordion-style1 panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <i class="bigger-110 icon-angle-down" data-icon-hide="icon-angle-down" data-icon-show="icon-angle-right"></i>
+                    已分配岗位															</a>																</h4>
+        </div>
+
+        <div class="panel-collapse in" id="collapseOne" style="height: auto;">
+            <div class="panel-body widget-main padding-0">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="table-responsive panel-body widget-main padding-0">
+                        <div class="table-responsive panel-body" style="padding:0px; margin-top:-1px;">
                             <div class="dataTables_wrapper">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -43,4 +47,5 @@
             </div>
         </div>
     </div>
-</div><!-- /span -->
+
+</div>

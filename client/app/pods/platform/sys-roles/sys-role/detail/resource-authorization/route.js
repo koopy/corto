@@ -9,8 +9,8 @@ Ember.Route.extend({
     var container = this.container;
     var currentModel = this.get('currentModel');
     modules.map(function(item){
-      var con = container.lookup('controller:'+item);
-      if(con){
+      var con = container.lookup('controller:' + item);
+      if (con) {
         Ember.sendEvent(con,'enter',[currentModel]);
       }
     });
