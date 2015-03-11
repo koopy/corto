@@ -1,20 +1,24 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import {
+  Promise,
+  promiseArray,
+  serializerFor,
+  serializerForAdapter,
+  _guard,
+  _bind,
+  _objectIsAlive
+  } from './utils/serialize-meta';
 
-var get = Ember.get;
-var PromiseArray = DS.PromiseArray;
-var promiseArray = function(promise, label) {
-  return PromiseArray.create({
-    promise: Promise.resolve(promise, label)
-  });
-};
+
 export default DS.Store.extend({
   findExclude: function (typeName, query) {
     Ember.assert("You need to pass a type to the store's findExclude method", arguments.length >= 1);
     Ember.assert("You need to pass a query with type && id to the store's findExclude method", arguments.length === 2 );
 
-    var adapter = this.adapterFor(typeName);
+
     var type = this.modelFor(typeName);
+    var adapter = this.adapterFor(type);
     var array = this.recordArrayManager
       .createAdapterPopulatedRecordArray(type, query);
     return promiseArray(_findExclude(adapter, this, type,query,array));
@@ -49,53 +53,7 @@ function _findExclude(adapter, store, type, query,recordArray) {
 }
 
 
-function serializerFor(container, type, defaultSerializer){
-  return container.lookup('serializer:'+type) ||
-    container.lookup('serializer:application') ||
-    container.lookup('serializer:' + defaultSerializer) ||
-    container.lookup('serializer:-default');
-}
-function serializerForAdapter(adapter,type){
-  var serializer = adapter.serializer;
-  var defaultSerializer = adapter.defaultSerializer;
-  var container = adapter.container;
 
-  if (container && serializer === undefined) {
-    serializer = serializerFor(container, type.typeKey, defaultSerializer);
-  }
-
-  if (serializer === null || serializer === undefined) {
-    serializer = {
-      extract: function(store, type, payload) { return payload; }
-    };
-  }
-
-  return serializer;
-}
-//function adapterRun(store, fn) {
-//  return Ember.run(fn);
-//}
-var Promise = Ember.RSVP.Promise;
-function _guard(promise, test) {
-  var guarded = promise['finally'](function() {
-    if (!test()) {
-      guarded._subscribers.length = 0;
-    }
-  });
-
-  return guarded;
-}
-
-function _bind(fn) {
-  var args = Array.prototype.slice.call(arguments, 1);
-
-  return function() {
-    return fn.apply(undefined, args);
-  };
-}
-function _objectIsAlive(object) {
-  return !(get(object, 'isDestroyed') || get(object, 'isDestroying'));
-}
 function findAsyncHasMany(adapter, store, record, relationship, query,recordArray) {
   var promise = adapter.findAsyncHasMany(store, record, relationship, query,recordArray);
   var serializer = serializerForAdapter(adapter, relationship.type);

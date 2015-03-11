@@ -67,7 +67,20 @@ var locale = {
       }
     },
     sysOrgs: {
-      name: 'Organization'
+      name: 'Organization',
+      columns: {
+        name: '群组名称',
+        code: '群组代码',
+        description:'xx'
+      }
+    },
+    sysDepts:{
+      name:'Department',
+      columns: {
+        name: 'Name',
+        code: 'Code',
+        description:'Description'
+      }
     }
   },
   flow: {

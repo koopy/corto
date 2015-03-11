@@ -5,7 +5,10 @@ Ember.Route.extend({
   renderTemplate: function () {
     this.render();
     var routeName = this.routeName;
-    var modules = [routeName+'.position',routeName+'.group'];
+    var elements=['department', 'group', 'org', 'position', 'user'];
+    var modules = elements.map(function (item) {
+      return routeName + '.' + item;
+    });
     var container = this.container;
     var currentModel = this.get('currentModel');
     modules.map(function(item){
@@ -14,14 +17,12 @@ Ember.Route.extend({
         Ember.sendEvent(con,'enter',[currentModel]);
       }
     });
-
-    this.render(routeName + '.position', {
-      into: routeName,
-      outlet: 'position'
-    });
-    this.render(routeName + '.group', {
-      into: routeName,
-      outlet: 'group'
+    var self = this;
+    modules.forEach(function (item, idx) {
+      self.render(item, {
+        into: routeName,
+        outlet: elements[idx]
+      });
     });
   }
 });

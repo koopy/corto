@@ -1,3 +1,4 @@
+
 module.exports = function (SysUserRelation) {
   SysUserRelation.excludeSerializered = true;
   SysUserRelation.definition.properties.created.default = function () {

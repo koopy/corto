@@ -46,6 +46,10 @@
     "dataSource": "db",
     "public": true
   },
+  "sysRoleRelation": {
+    "dataSource": "db",
+    "public": true
+  },
   "sysPosition": {
     "dataSource": "db",
     "public": true

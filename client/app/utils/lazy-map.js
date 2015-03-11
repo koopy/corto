@@ -18,6 +18,7 @@ acls = normalizeAcl(acls);
 /**
  * i18n:
  *  cn: use route/template if localePath can't find
+ *
  * field:{
  * name://if not support ,use localPath
  * route/template

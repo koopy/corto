@@ -14,95 +14,35 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th align="center">机构角色</th>
-                        <th align="center">岗位角色</th>
-                        <th align="center">群组角色</th>
-                        <th align="center">人员角色</th>
+                      {{#each item in header}}
+                          <th align="center">{{item.name}}</th>
+                      {{/each}}
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center">
-                            <button class="btn btn-xs btn-success">
-                                <i class="icon-ok bigger-120"></i>																								</button>																							</td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center"></td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center"></td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">角色1</td>
-                        <td align="center"></td>
-                        <td align="center"></td>
-                        <td align="center">
-                            <button class="btn btn-xs">
-                                <i class="icon-ok bigger-120"></i>																			</button>																		</td>
-                        <td align="center"></td>
-                    </tr>
+                      {{#each item in controller}}
+                          <tr>
+                              <td align="center">{{item.name}}</td>
+                              {{#each relation in item.relationTypes}}
+                                {{#if relation}}
+                                    <td align="center">
+                                        {{#if relation.editable}}
+                                            <button class="btn btn-xs btn-success" {{action 'clearRelationship' relation context}}>
+                                                <i class="icon-ok bigger-120"></i>
+                                            </button>
+                                        {{else}}
+                                            <button class="btn btn-xs">
+                                                <i class="icon-ok bigger-120"></i>
+                                            </button>
+                                        {{/if}}
+                                    </td>
+                                {{else}}
+                                    <td align="center"></td>
+                                {{/if}}
+                              {{/each}}
+                          </tr>
+                      {{/each}}
                     </tbody>
                 </table>
             </div>
