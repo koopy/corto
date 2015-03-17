@@ -16,6 +16,13 @@ Ember.Controller.extend(Ember.PromiseProxyMixin,{
     var selection = this.get('selection');
     selection.clear();
   },
+  /**
+   * modal list controller
+   * always trigger by other controller
+   * 1.so need to do some action when other trigger to open it      : sendEvent open on open modal
+   * 2.and after do something on modal ,need to notify the trigger  : save trigger source
+   * 3.how to send args from trigger source to modal list when open the modal
+   */
   loadData: function (modelType) {
     var setted = this.get('modelType');
     if (!setted) {
@@ -26,8 +33,11 @@ Ember.Controller.extend(Ember.PromiseProxyMixin,{
     }
 
     modelType = modelType || setted;
-
     this.loadBefore();
+    //TODO get args from sender
+    //TODO use QueryParamsForBackend ?
+    var triggerSource = this.get('triggerSource');
+    var args = Ember.tryInvoke(triggerSource,'queryParams');
     var params = {
       filter: {
         type: 'sysUser',
@@ -51,7 +61,11 @@ Ember.Controller.extend(Ember.PromiseProxyMixin,{
     mainOps.initCallback = Ember.K;
 
     this.set('content', ExcludePagedArray.create(mainOps));
+
+    this.loadAfter();
+
   }.on('open'),
+  loadAfter: Ember.K,
   columns: function () {
     var model = this.get('modelType');
     return model.subsetDefinitions;
@@ -80,3 +94,4 @@ Ember.Controller.extend(Ember.PromiseProxyMixin,{
     }
   }
 });
+//TODO design before and after hook

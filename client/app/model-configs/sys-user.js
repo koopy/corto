@@ -29,6 +29,7 @@ var config = {
 };
 var columns = {
   checkbox: {
+    order:1,
     disableLocale: true,
     columnWidth: '10%',
     textAlign: 'text-align-center',
@@ -36,6 +37,7 @@ var columns = {
     tableCellViewClass: 'checkbox-cell'
   },
   name: {
+    order:2,
     columnWidth: '10%',
     contentPath: 'name',
     formOptions: {
@@ -43,10 +45,12 @@ var columns = {
     }
   },
   account: {
+    order:3,
     columnWidth: '10%',
     contentPath: 'account'
   },
   sex: {
+    order:4,
     headerCellName: '性别',
     columnWidth: '10%',
     contentPath: 'sex',
@@ -55,6 +59,7 @@ var columns = {
     }
   },
   email: {
+    order:5,
     headerCellName: '邮箱',
     columnWidth: 100,
     contentPath: 'email',
@@ -64,6 +69,7 @@ var columns = {
     }
   },
   officePhone: {
+    order:6,
     columnWidth: 100,
     contentPath: 'officePhone',
     isVisible: false,
@@ -72,6 +78,7 @@ var columns = {
     }
   },
   status: {
+    order:7,
     headerCellName: '状态',
     columnWidth: '10%',
     contentPath: 'status',
@@ -80,6 +87,7 @@ var columns = {
     }
   },
   homePhone: {
+    order:8,
     headerCellName: '家庭电话',
     columnWidth: 100,
     contentPath: 'homePhone',
@@ -89,6 +97,7 @@ var columns = {
     }
   },
   mobile: {
+    order:9,
     headerCellName: '手机',
     columnWidth: 100,
     contentPath: 'mobile',
@@ -98,6 +107,7 @@ var columns = {
     }
   },
   address: {
+    order:10,
     headerCellName: '家庭地址',
     columnWidth: 100,
     contentPath: 'address',
@@ -107,6 +117,7 @@ var columns = {
     }
   },
   description: {
+    order:11,
     headerCellName: '描述',
     columnWidth: 100,
     contentPath: 'description',
@@ -118,7 +129,7 @@ var columns = {
 };
 
 
-Ember.merge(columns, commonColumn);
+columns = Ember.$.extend({},commonColumn,columns);
 export
 {
   config,

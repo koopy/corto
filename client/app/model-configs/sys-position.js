@@ -54,7 +54,7 @@ var columns = {
 };
 
 
-Ember.merge(columns, commonColumn);
+columns = Ember.$.extend({},commonColumn,columns);
 export
 {
   config,

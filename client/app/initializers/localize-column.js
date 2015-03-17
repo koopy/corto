@@ -44,7 +44,9 @@ function initialize(container, application) {
       cache[fieldName] = definition;
     }
     return {
-      collections: collections,
+      collections: collections.sort(function(item1,item2){
+        return item1.get('order') - item2.get('order');
+      }),
       cache: cache
     };
   }

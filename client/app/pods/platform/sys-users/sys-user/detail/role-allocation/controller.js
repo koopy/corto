@@ -2,9 +2,11 @@
  * Created by weiyang on 15-1-13.
  */
 import Ember from 'ember';
+import SysRole from 'app/models/sys-role';
 
 export default
 Ember.ArrayController.extend({
+  modelType:SysRole,
   actions:{
     clearRelationship: function (relation, role) {
       relation.destroyRecord().then(function(){

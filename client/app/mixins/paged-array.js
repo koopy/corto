@@ -12,7 +12,7 @@ function createMixin(model) {
       args.status = null;
       args[field] = null;
       this.set('args', args);
-      Ember.oneWay(this,"content.args","args");
+      Ember.oneWay(this,'content.args','args');
     },
     statusDidChange:function(){
       var status = this.get('status');
@@ -20,9 +20,9 @@ function createMixin(model) {
       this.set('args',Ember.copy(this.get('args')));
     }.observes('status'),
     statusContent: [
-      {name: "全部", key: 1},
-      {name: "启用", key: 2},
-      {name: "禁用", key: 3}
+      {name: '全部', key: 1},
+      {name: '启用', key: 2},
+      {name: '禁用', key: 3}
     ],
     removeUndefined: function (array) {
       if (Ember.isArray(array)) {

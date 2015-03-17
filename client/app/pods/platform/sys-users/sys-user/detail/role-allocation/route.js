@@ -49,6 +49,9 @@ Ember.Route.extend({
   extractRole: function (relations) {
     var roles = [];
     relations.forEach(function (relation) {
+      if(Ember.isEmpty(relation)){
+        return;
+      }
       var role = relation.get('sysRole');
       var principalType = relation.get('principalType');
       if (!roles.contains(role)) {
