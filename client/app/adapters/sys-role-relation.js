@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ApplicationAdapter from './application';
 
 export default ApplicationAdapter.extend({
-  findAllRoles:function(store,type,filter){
-    return this.ajax(this.appendURL(type.typeKey, "findAllRoles"), "GET", {data: {filter:filter}});
+    findRolesByUser:function(store,type,filter){
+    return this.ajax(this.appendURL(type.typeKey, "findRolesByUser"), "GET", {data: {filter:filter}});
   }
 });

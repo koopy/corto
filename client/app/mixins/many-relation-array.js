@@ -22,15 +22,18 @@ function createMixin(model,relationModel) {
       if (currentModel) {
         this.set('currentModel', currentModel);
       }
-      var params = {
-        filter: {
-          include: [modelName],
-          where: {
-            principalType: modelName,
-            objectId: 1
-          }
-        }
-      };
+        //TODO
+        var params = {
+            include: modelName,
+            objectId: currentModel.get('id'),
+            limit:1,
+            offset:0,
+            filter: {
+                where: {
+
+                }
+            }
+        };
       var mainOps = {
         page: params.page || this.get('startingPage'),
         perPage: params.perPage || this.get('perPage'),
