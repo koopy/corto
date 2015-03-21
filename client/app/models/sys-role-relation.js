@@ -30,9 +30,9 @@ var Model = Relation.extend({
 
 
 Model.reopenClass({
-  findAllRoles:function(store,userId){
-    Ember.assert("You need to pass a type to the SysRole's findAllRoles method", arguments.length >= 1);
-    Ember.assert("You need to pass a userId to the SysRole's findAllRoles method", arguments.length === 2 );
+    findRolesByUser:function(store,userId){
+    Ember.assert("You need to pass a type to the SysRole's _findRolesByUser method", arguments.length >= 1);
+    Ember.assert("You need to pass a userId to the SysRole's _findRolesByUser method", arguments.length === 2 );
 
     var type = store.modelFor(this.typeKey);
     var adapter = store.adapterFor(type);
@@ -40,14 +40,14 @@ Model.reopenClass({
       userId:userId
     }
     var array = store.recordArrayManager.createAdapterPopulatedRecordArray(type, query);
-    return promiseArray(_findAllRoles(adapter, store, type,query,array));
+    return promiseArray(_findRolesByUser(adapter, store, type,query,array));
   }
 });
 
-function _findAllRoles(adapter, store, type, query,recordArray) {
-  var promise = adapter.findAllRoles(store, type, query, recordArray);
+function _findRolesByUser(adapter, store, type, query,recordArray) {
+  var promise = adapter.findRolesByUser(store, type, query, recordArray);
   var serializer = serializerForAdapter(adapter, type);
-  var label = "DS: Handle Adapter#findAllRoles of " + type;
+  var label = "DS: Handle Adapter#findRolesByUser of " + type;
 
   promise = Promise.cast(promise, label);
   promise = _guard(promise, _bind(_objectIsAlive, store));

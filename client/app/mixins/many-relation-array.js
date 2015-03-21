@@ -8,17 +8,17 @@ var a_slice = [].slice,
   Promise = Ember.RSVP.Promise;
 
 export
-function createMixin(model,relationModel) {
+function createMixin(model, relationModel) {
   var columns = model.columns;
   var identity = model.config.identity;
   var field = identity.field;
   var modelName = model.typeKey;
   Ember.assert('The model :' + model + ' must config the identity with field and name', identity && identity.field && identity.name);
 
-  return Ember.Mixin.create(Ember.PromiseProxyMixin,{
+  return Ember.Mixin.create(Ember.PromiseProxyMixin, {
     modelType: model,
     currentModel: null,
-    init:function(){
+    init: function () {
       this._super();
       var params = {
         filter: {
@@ -29,16 +29,16 @@ function createMixin(model,relationModel) {
           }
         }
       };
-      this.set('args',params);
+      this.set('args', params);
     },
     loadData: function (currentModel) {
       if (currentModel) {
         this.set('currentModel', currentModel);
       }
-
-      this.set('content',this.findPaged(relationModel.typeKey,this.get('args')));
+      this.set('content', this.findPaged(relationModel.typeKey, this.get('args')));
     }.on('enter'),
-    findPaged:function(name,params,callback){
+    findPaged: function (name, params, callback) {
+      //TODO
       var mainOps = {
         page: params.page || 1,
         perPage: params.perPage || 10,
@@ -67,11 +67,11 @@ function createMixin(model,relationModel) {
         }
         return col;
       });
-      return subset.map(function(item){
+      return subset.map(function (item) {
         return ColumnDefinition.create(item);
       });
     }.property(),
-    queryParams: ['page', 'perPage','query'],
+    queryParams: ['page', 'perPage', 'query'],
     page: 1,
     perPage: 10,
     pageBinding: 'content.page',
@@ -79,12 +79,12 @@ function createMixin(model,relationModel) {
     totalPagesBinding: 'content.totalPages',
 
     actions: {
-      search:function(name){
+      search: function (name) {
         var args = this.get('args');
         args["filter"]["where"][field] = {
           like: '%' + name + '%'
         };
-        this.set('args',args);
+        this.set('args', args);
       },
       ensure: function (selection) {
         //TODO check if the relation has exists
@@ -114,13 +114,14 @@ function createMixin(model,relationModel) {
   });
 }
 
-function ManyRelationArray(model,relationModel) {
+function ManyRelationArray(model, relationModel) {
   Ember.assert('ManyRelationArray Mixin must provide the corresponding model', model);
   Ember.assert('ManyRelationArray Mixin must provide the relationModel', relationModel);
 
-  return createMixin(model,relationModel);
+  return createMixin(model, relationModel);
 }
 
-export {
+export
+{
   ManyRelationArray
 }

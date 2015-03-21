@@ -74,6 +74,7 @@ Ember.Route.extend({
   model: function () {
     var SysRoleRelation = this.store.modelFor('sys-role-relation');
     var controller = this.container.lookup('controller:' + this.routeName);
-    return SysRoleRelation.findAllRoles(this.store, 1);
+      var currentModel = this.modelFor('platform.sysUsers.sysUser');
+      return SysRoleRelation.findRolesByUser(this.store, currentModel.get('id'));
   }
 });
