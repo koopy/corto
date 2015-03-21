@@ -1,0 +1,9 @@
+{{#if view.isEditing}}
+  {{view "select"
+  content=programmers
+  value=selectedProgrammer
+  prompt="Please select a relation"
+  }}
+{{else}}
+    <span class='content'>{{view.cellContent}}</span>
+{{/if}}

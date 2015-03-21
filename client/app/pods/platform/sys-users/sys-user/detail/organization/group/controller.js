@@ -1,15 +1,17 @@
 import Ember from 'ember';
 import
-{
+  {
   ManyRelationArray
-}
-from
-'app/mixins/many-relation-array';
+  }
+  from
+    'app/mixins/many-relation-array';
 import SysGroup from 'app/models/sys-group';
 import SysUserRelation from 'app/models/sys-user-relation';
 import SenderAction from 'app/mixins/sender-action';
 
+import AdvancedQuery from 'app/mixins/advanced-query';
+
 export default
-Ember.Controller.extend(ManyRelationArray(SysGroup,SysUserRelation),SenderAction, {
+Ember.Controller.extend(ManyRelationArray(SysGroup, SysUserRelation), SenderAction, {
 
 });

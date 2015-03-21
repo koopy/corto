@@ -3,11 +3,6 @@ import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import PagedRemoteArray from 'ember-cli-pagination/remote/paged-remote-array';
 
 PagedRemoteArray.reopen({
-  paramsForBackend: function() {
-    var ops = this._super();
-    ops.filter = ops.filter || this.get('args');
-    return ops;
-  }.property('page','perPage','paramMapping','paramsForBackendCounter','args'),
   pageChanged: function() {
     this.set("promise", this.fetchContent());
   }.observes("page", "perPage","args")

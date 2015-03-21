@@ -14,3 +14,9 @@
 
 1. Ember.onerror
 2. Promise.on('error')
+
+
+### TODO
+1. backend exclude interface
+2. frontend pagination
+3. how to do advanced query

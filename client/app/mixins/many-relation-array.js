@@ -11,17 +11,15 @@ export
 function createMixin(model,relationModel) {
   var columns = model.columns;
   var identity = model.config.identity;
+  var field = identity.field;
   var modelName = model.typeKey;
   Ember.assert('The model :' + model + ' must config the identity with field and name', identity && identity.field && identity.name);
 
   return Ember.Mixin.create(Ember.PromiseProxyMixin,{
     modelType: model,
-    startingPage: 1,
     currentModel: null,
-    loadData: function (currentModel) {
-      if (currentModel) {
-        this.set('currentModel', currentModel);
-      }
+    init:function(){
+      this._super();
       var params = {
         filter: {
           include: [modelName],
@@ -31,10 +29,20 @@ function createMixin(model,relationModel) {
           }
         }
       };
+      this.set('args',params);
+    },
+    loadData: function (currentModel) {
+      if (currentModel) {
+        this.set('currentModel', currentModel);
+      }
+
+      this.set('content',this.findPaged(relationModel.typeKey,this.get('args')));
+    }.on('enter'),
+    findPaged:function(name,params,callback){
       var mainOps = {
-        page: params.page || this.get('startingPage'),
-        perPage: params.perPage || this.get('perPage'),
-        modelName: relationModel.typeKey,
+        page: params.page || 1,
+        perPage: params.perPage || 10,
+        modelName: name,
         store: this.store
       };
 
@@ -45,10 +53,10 @@ function createMixin(model,relationModel) {
       var otherOps = Util.paramsOtherThan(params, ["page", "perPage", "paramMapping"]);
       mainOps.otherParams = otherOps;
 
-      mainOps.initCallback = Ember.K;
+      mainOps.initCallback = callback;
 
-      this.set('content', PagedRemoteArray.create(mainOps));
-    }.on('enter'),
+      return PagedRemoteArray.create(mainOps);
+    },
     columns: function () {
       var copyed = Ember.copy(columns, true);
       var subset = model.subset.map(function (f) {
@@ -63,14 +71,21 @@ function createMixin(model,relationModel) {
         return ColumnDefinition.create(item);
       });
     }.property(),
+    queryParams: ['page', 'perPage','query'],
     page: 1,
     perPage: 10,
-    limit: Ember.computed.alias('perPage'),
     pageBinding: 'content.page',
     perPageBinding: 'content.perPage',
     totalPagesBinding: 'content.totalPages',
 
     actions: {
+      search:function(name){
+        var args = this.get('args');
+        args["filter"]["where"][field] = {
+          like: '%' + name + '%'
+        };
+        this.set('args',args);
+      },
       ensure: function (selection) {
         //TODO check if the relation has exists
         var sender = a_slice.call(arguments, -1)[0];

@@ -2,17 +2,20 @@ import Ember from 'ember';
 
 var get = Ember.get;
 
+
 function createMixin(model) {
   var field = model.config.identity.field;
   return Ember.Mixin.create({
     init: function () {
       this._super();
       this.set('selection', Ember.A());
-      var args={};
-      args.status = null;
-      args[field] = null;
-      this.set('args', args);
-      Ember.oneWay(this,'content.args','args');
+//      this.set('advancedQuery',AdvancedQuery.create({
+//        queryConfig:{
+//
+//        },
+//        owner:this
+//      }));
+      Ember.oneWay(this, "content.args", "args");
     },
     statusDidChange:function(){
       var status = this.get('status');
@@ -35,13 +38,20 @@ function createMixin(model) {
       }
       return array;
     },
-    queryParams: ['page', 'perPage', 'limit'],
+    queryParams: ['page', 'perPage', 'limit','query'],
+    /**
+     * reload data if query value changed
+     * just like pageIndex and perPage
+     */
+    query: function (key, value) {
+      var ret = {};
+
+    }.property(),
 
     // set default values, can cause problems if left out
     // if value matches default, it won't display in the URL
     page: 1,
     perPage: 10,
-    limit: Ember.computed.alias('perPage'),
     pageBinding: 'content.page',
     perPageBinding: 'content.perPage',
     totalPagesBinding: 'content.totalPages',
@@ -67,7 +77,7 @@ function createMixin(model) {
           }
         }
       },
-      enter: function (name) {
+      search: function (name) {
         var status = this.get('status');
         var nameArgs = {};
         nameArgs[field] = {
