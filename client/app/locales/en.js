@@ -81,6 +81,12 @@ var locale = {
         code: 'Code',
         description:'Description'
       }
+    },
+    tool:{
+      name:'Data Tool',
+      generator:{
+        name:'Query Generator'
+      }
     }
   },
   flow: {

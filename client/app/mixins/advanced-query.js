@@ -216,7 +216,7 @@ var AdvancedQuery = Ember.Object.extend({
         //operator
         if (conds[key] && conds[key].constructor.name === 'Object') {
           operator = Object.keys(conds[key])[0];
-
+          hasOperator = true;
           var valueType = $where[operator];
           switch (valueType) {
             case VALUE:
@@ -257,13 +257,13 @@ var AdvancedQuery = Ember.Object.extend({
   order: Ember.computed(function () {
 
   }),
-  query: Ember.computed('fields', 'order', 'where', function () {
+  queryParams: Ember.computed('fields', 'order', 'where', function () {
     var query = {};
     var fields = this.assembleFields();
     var order = this.assembleOrder();
     var where = this.assembleWhere();
-    query['fields'] = fields;
-    query['order'] = order;
+//    query['fields'] = fields;
+//    query['order'] = order;
     query['where'] = where;
     return query;
   }).readOnly().volatile()

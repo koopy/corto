@@ -20,24 +20,28 @@ var config = {
           authCode: '',
           children: [
             {
-              name:'detail',
+              name: 'detail',
               template: 'detail',
-              path:'/',
-              authCode:'',
-              children:[{
-                name:'profile',
-                template:'profile',
-                path:'/',
-                authCode:''
-              },{
-                name:'roleAllocation',
-                template:'roleAllocation',
-                authCode:''
-              },{
-                name:'organization',
-                template:'organization',
-                authCode:''
-              }]
+              path: '/',
+              authCode: '',
+              children: [
+                {
+                  name: 'profile',
+                  template: 'profile',
+                  path: '/',
+                  authCode: ''
+                },
+                {
+                  name: 'roleAllocation',
+                  template: 'roleAllocation',
+                  authCode: ''
+                },
+                {
+                  name: 'organization',
+                  template: 'organization',
+                  authCode: ''
+                }
+              ]
             },
             {
               template: 'edit',
@@ -136,24 +140,28 @@ var config = {
           authCode: '',
           children: [
             {
-              name:'detail',
+              name: 'detail',
               template: 'detail',
-              path:'/',
-              authCode:'',
-              children:[{
-                name:'profile',
-                template:'profile',
-                path:'/',
-                authCode:''
-              },{
-                name:'resourceAuthorization',
-                template:'resourceAuthorization',
-                authCode:''
-              },{
-                name:'roleAllocation',
-                template:'roleAllocation',
-                authCode:''
-              }]
+              path: '/',
+              authCode: '',
+              children: [
+                {
+                  name: 'profile',
+                  template: 'profile',
+                  path: '/',
+                  authCode: ''
+                },
+                {
+                  name: 'resourceAuthorization',
+                  template: 'resourceAuthorization',
+                  authCode: ''
+                },
+                {
+                  name: 'roleAllocation',
+                  template: 'roleAllocation',
+                  authCode: ''
+                }
+              ]
             },
             {
               template: 'edit',
@@ -187,8 +195,19 @@ var config = {
           ]
         }
       ]
+    },
+    {
+      template: 'tool',
+      group: 'sidebar',
+      authCode: '',
+      children:[{
+        template:'generator',
+        path:'/',
+        authCode:''
+      }]
     }
   ]
 };
 
-export default config;
+export default
+config;

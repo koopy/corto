@@ -23,7 +23,7 @@ module.exports = function (environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-        'ember-document-title':true
+        'ember-document-title': true
       }
     },
 
@@ -35,7 +35,8 @@ module.exports = function (environment) {
       strict: true,
       loggingEnabled: true,
       enableAuth: true,
-      enableI18n: true
+      enableI18n: true,
+      recordNum: 10
     },
     SESSION: {
       identification: 'username'

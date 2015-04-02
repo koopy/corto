@@ -1,8 +1,6 @@
 {{#if view.isEditing}}
   {{view view.innerSelect
-  content=controller.targetObject.operators
-  optionValuePath="content.key"
-  optionLabelPath="content.value"
+  content=controller.targetObject.fields
   }}
 {{else}}
     <span class='content'>{{view.cellContent}}</span>

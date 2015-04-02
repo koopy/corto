@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import AdvancedQuery from 'app/mixins/advanced-query';
 
 var get = Ember.get;
 
@@ -9,18 +10,23 @@ function createMixin(model) {
     init: function () {
       this._super();
       this.set('selection', Ember.A());
-//      this.set('advancedQuery',AdvancedQuery.create({
-//        queryConfig:{
-//
-//        },
-//        owner:this
-//      }));
-      Ember.oneWay(this, "content.args", "args");
+
+      var filter = {
+        where: {
+          status:true
+        }
+      };
+      filter.where[field] = {
+        like: true
+      };
+      this.set('advancedQuery', AdvancedQuery.create({
+        filters: filter,
+        modelConstructor: model,
+        owner: this
+      }));
     },
     statusDidChange:function(){
-      var status = this.get('status');
-      this.set('args.status',status);
-      this.set('args',Ember.copy(this.get('args')));
+      this.flushQuery();
     }.observes('status'),
     statusContent: [
       {name: '全部', key: 1},
@@ -38,15 +44,7 @@ function createMixin(model) {
       }
       return array;
     },
-    queryParams: ['page', 'perPage', 'limit','query'],
-    /**
-     * reload data if query value changed
-     * just like pageIndex and perPage
-     */
-    query: function (key, value) {
-      var ret = {};
-
-    }.property(),
+    queryParams: ['page', 'perPage'],
 
     // set default values, can cause problems if left out
     // if value matches default, it won't display in the URL
@@ -56,12 +54,17 @@ function createMixin(model) {
     perPageBinding: 'content.perPage',
     totalPagesBinding: 'content.totalPages',
 
-    pageDidChange:function(){
+    pageChanged:function(){
       this.get('selection').clear();
     }.observes('page'),
     columns: function () {
       return model.columnDefinitions;
     }.property(),
+    flushQuery:function(){
+      Ember.run.schedule('sync', this, function() {
+        this.set('content.args',this.get('advancedQuery.queryParams'));
+      });
+    },
     actions: {
       delBatch: function (modalName) {
         var selection = this.get('selection');
@@ -78,14 +81,8 @@ function createMixin(model) {
         }
       },
       search: function (name) {
-        var status = this.get('status');
-        var nameArgs = {};
-        nameArgs[field] = {
-          like: '%' + name + '%'
-        };
-        this.set('args',Ember.merge({
-          status:status
-        },nameArgs));
+        this.set('name',name);
+        this.flushQuery();
       }
     }
   });

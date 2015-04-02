@@ -62,7 +62,7 @@ exports.findExclude = function findExclude(filter, cb) {
 
   self.query(sql, function (err, data) {
     if (err) {
-      return callback(err, []);
+      return cb(err, []);
     }
 
     var countSql = 'SELECT count(*) as cnt FROM ';

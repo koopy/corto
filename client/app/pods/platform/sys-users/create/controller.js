@@ -9,7 +9,7 @@ Ember.ObjectController.extend({
     rollback:function(){
       var model = this.get('model');
       var store = this.store;
-      store.dematerializeRecord(model);
+      store.unloadRecord(model);
     },
     back:function(){
       this.transitionToRoute('platform.sysUsers.index');
@@ -19,7 +19,7 @@ Ember.ObjectController.extend({
       if(model.get('isValid')){
         model.save().then(function(record){
           self.transitionToRoute('platform.sysUsers.sysUser',record);
-        });;
+        });
       }
     }
   }

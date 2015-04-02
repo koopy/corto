@@ -1,8 +1,8 @@
 {{#if view.isEditing}}
-  {{view "select"
-  content=relation
-  value=selectedProgrammer
-  prompt="Please select a relation"
+  {{view view.innerSelect
+  content=controller.targetObject.relations
+  optionValuePath="content.key"
+  optionLabelPath="content.value"
   }}
 {{else}}
     <span class='content'>{{view.cellContent}}</span>

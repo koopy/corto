@@ -4,7 +4,7 @@
 import TableCell from'ember-cli-ember-table/views/table-cell';
 
 export default TableCell.extend({
-  templateName:'generator/operator',
+  templateName:'generator/field',
   innerSelect:Ember.Select.extend({
     valueBinding: 'parentView.cellContent',
     focusOut:function(){

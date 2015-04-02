@@ -54,6 +54,10 @@ function initialize(container, application) {
   modules.forEach(function (m, idx) {
     var columns = m.columns;
     var config = m.config;
+    var subsetFields = ['checkbox', config.identity.field, 'operation'];
+    if (config.subsetFields && config.subsetFields.length > 0) {
+      subsetFields = config.subsetFields;
+    }
     var localizePrefix = config.columnOptions && config.columnOptions.localizePrefix;
     Ember.assert('The localize prefix must not be null', localizePrefix);
     var name = names[idx];
@@ -64,8 +68,8 @@ function initialize(container, application) {
       columns: columns,
       columnDefinitions: result.collections,
       config: config,
-      subset: ['checkbox', config.identity.field, 'operation'],
-      subsetDefinitions: subset(config.identity.field, result.cache)
+      subset: subsetFields,
+      subsetDefinitions: subset(subsetFields, result.cache)
     });
   });
 }

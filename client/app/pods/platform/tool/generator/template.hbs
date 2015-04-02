@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <div class="dataTables_wrapper">
+                <div class="row">
+                    <div class="col-sm-12">
+                      {{view "select"
+                      content=modelPairs
+                      value=selectedModel
+                      optionValuePath="content.key"
+                      optionLabelPath="content.value"
+                      }}
+                      <button class="btn btn-default btn-tab" {{action "delete"}} title="批量删除"><i class="fa fa-trash-o light-grey"></i></button>
+                      <button class="btn btn-default btn-tab" {{action "addRow"}} title="新建"><i class="fa fa-plus light-grey"></i></button>
+
+                    </div>
+                </div>
+              {{ember-table
+              hasFooter=false
+              enableContentSelection=true
+              selectionMode="multiple"
+              rowHeight=37
+              columns=columns
+              content=content
+              persistedSelection=controller.selection
+              }}
+              <button class="btn btn-default btn-tab" {{action "generate"}} title="Generate">Generate</button>
+                <br/>
+                {{textarea value=filters rows="15" cols="20"}}
+            </div>
+        </div>
+    </div>
+</div>

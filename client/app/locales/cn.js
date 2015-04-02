@@ -81,6 +81,12 @@ var locale = {
         code: '群组代码',
         description:'xx'
       }
+    },
+    tool:{
+      name:'Data Tool',
+      generator:{
+        name:'Query Generator'
+      }
     }
   },
   flow: {

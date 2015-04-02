@@ -2,11 +2,13 @@ import Ember from 'ember';
 import ColumnDefinition from 'ember-cli-ember-table/column-definition';
 import PagedRemoteArray from 'ember-cli-pagination/remote/paged-remote-array';
 import Util from 'ember-cli-pagination/util';
+import AdvancedQuery from 'app/mixins/advanced-query';
 
 var a_slice = [].slice,
   get = Ember.get,
   Promise = Ember.RSVP.Promise;
 
+//TODO do render after promise fulfill
 export
 function createMixin(model, relationModel) {
   var columns = model.columns;
@@ -18,8 +20,7 @@ function createMixin(model, relationModel) {
   return Ember.Mixin.create(Ember.PromiseProxyMixin, {
     modelType: model,
     currentModel: null,
-    init: function () {
-      this._super();
+    paramsForBackend:function(){
       var params = {
         filter: {
           include: [modelName],
@@ -29,7 +30,27 @@ function createMixin(model, relationModel) {
           }
         }
       };
-      this.set('args', params);
+      params.paramMapping={
+        perPage: 'limit',
+        total_pages: 'totalPage'
+      };
+      return params;
+    }.property(),
+    init: function () {
+      this._super();
+      this.set('advancedQuery', AdvancedQuery.create({
+        filters: {
+          where:{
+            name: {
+              like: true
+            }
+          }
+        },
+        modelConstructor: model,
+        owner: this
+      }));
+
+      this.set('args', this.get('paramsForBackend'));
     },
     loadData: function (currentModel) {
       if (currentModel) {
@@ -38,10 +59,9 @@ function createMixin(model, relationModel) {
       this.set('content', this.findPaged(relationModel.typeKey, this.get('args')));
     }.on('enter'),
     findPaged: function (name, params, callback) {
-      //TODO
       var mainOps = {
         page: params.page || 1,
-        perPage: params.perPage || 10,
+        perPage: params.perPage || 1,
         modelName: name,
         store: this.store
       };
@@ -58,9 +78,9 @@ function createMixin(model, relationModel) {
       return PagedRemoteArray.create(mainOps);
     },
     columns: function () {
-      var copyed = Ember.copy(columns, true);
+      var clone = Ember.copy(columns, true);
       var subset = model.subset.map(function (f) {
-        var col = get(copyed, f);
+        var col = get(clone, f);
         Ember.assert('Can not get the column with field :', f);
         if (f == identity.field) {
           col.contentPath = modelName + '.' + f;
@@ -71,20 +91,22 @@ function createMixin(model, relationModel) {
         return ColumnDefinition.create(item);
       });
     }.property(),
-    queryParams: ['page', 'perPage', 'query'],
+    queryParams: ['page', 'perPage'],
     page: 1,
     perPage: 10,
     pageBinding: 'content.page',
     perPageBinding: 'content.perPage',
     totalPagesBinding: 'content.totalPages',
-
+    flushQuery:function(){
+      Ember.run.schedule('sync', this, function() {
+        var queryParams = this.get('advancedQuery.queryParams');
+        this.set('content.args',queryParams);
+      });
+    },
     actions: {
       search: function (name) {
-        var args = this.get('args');
-        args["filter"]["where"][field] = {
-          like: '%' + name + '%'
-        };
-        this.set('args', args);
+        this.set('name',name);
+        this.flushQuery();
       },
       ensure: function (selection) {
         //TODO check if the relation has exists

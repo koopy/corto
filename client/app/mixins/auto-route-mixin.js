@@ -1,12 +1,6 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-import PagedRemoteArray from 'ember-cli-pagination/remote/paged-remote-array';
 
-PagedRemoteArray.reopen({
-  pageChanged: function() {
-    this.set("promise", this.fetchContent());
-  }.observes("page", "perPage","args")
-});
 
 export default
 Ember.Mixin.create(RouteMixin, {
@@ -16,7 +10,6 @@ Ember.Mixin.create(RouteMixin, {
       perPage: 'limit',
       total_pages: 'totalPage'
     };
-    params.offset = params.perPage * (params.page - 1);
     return this.findPaged(this.resolveRouteName(), params);
   },
   resolveRouteName: function () {

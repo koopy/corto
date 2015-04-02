@@ -8,6 +8,9 @@ module.exports = function (SysUser) {
     SysUser.definition.properties.modified.default =
       defaultDate();
 
+  SysUser.definition.properties.status.default =
+    SysUser.definition.properties.modified.default = '2';
+
   SysUser.uniqueness = function (filter, cb) {
     var err = null;
     if (filter.nickname == 'jwy') {
