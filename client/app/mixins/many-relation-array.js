@@ -26,7 +26,7 @@ function createMixin(model, relationModel) {
           include: [modelName],
           where: {
             principalType: modelName,
-            objectId: 1
+            objectId: this.get('currentModel.id')
           }
         }
       };
@@ -49,13 +49,12 @@ function createMixin(model, relationModel) {
         modelConstructor: model,
         owner: this
       }));
-
-      this.set('args', this.get('paramsForBackend'));
     },
     loadData: function (currentModel) {
       if (currentModel) {
         this.set('currentModel', currentModel);
       }
+      this.set('args', this.get('paramsForBackend'));
       this.set('content', this.findPaged(relationModel.typeKey, this.get('args')));
     }.on('enter'),
     findPaged: function (name, params, callback) {

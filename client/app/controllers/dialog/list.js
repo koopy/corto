@@ -60,10 +60,11 @@ Ember.Controller.extend(Ember.PromiseProxyMixin,{
   }.on('open'),
 
   paramsForBackend:function(){
+    var triggerSource = this.get('triggerSource');
     var params = {
       filter: {
         type: 'sysUser',
-        id: 1
+        id: triggerSource.get('currentModel.id')
       }
     };
     params.paramMapping={

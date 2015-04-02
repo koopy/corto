@@ -91,13 +91,15 @@ Ember.Route.extend(ApplicationRouteMixin,{
     openModal: function (yieldName, modelType) {
       var name = this.pathForDialog(yieldName);
       var controller = this.controllerFor(name);
-      //sendEvent controller with open event
-      Ember.sendEvent(controller,'open',[modelType]);
 
+      //do first
       var sender = a_slice.call(arguments, -1)[0];
       if (sender && get(sender, 'asSender') === true){
         controller.set('triggerSource',sender);
       }
+      //sendEvent controller with open event
+      Ember.sendEvent(controller,'open',[modelType]);
+
       var dialogs = this.get('dialogs');
       dialogs.push({
         dialogName: name,
