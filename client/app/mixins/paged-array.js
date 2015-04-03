@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import AdvancedQuery from 'app/mixins/advanced-query';
+import AdvancedQuery from 'app/utils/advanced-query';
 
 var get = Ember.get;
-
 
 function createMixin(model) {
   var field = model.config.identity.field;
@@ -66,7 +65,7 @@ function createMixin(model) {
       });
     },
     actions: {
-      delBatch: function (modalName) {
+      delBatch: function (popupName) {
         var selection = this.get('selection');
         if (selection.length > 0) {
           selection = selection.map(function(item){
@@ -76,7 +75,7 @@ function createMixin(model) {
           });
           selection = this.removeUndefined(selection);
           if (selection.length > 0) {
-            return this.send('openModal', modalName, selection);
+            return this.send('openPopup', popupName, selection);
           }
         }
       },

@@ -5,7 +5,7 @@ import Ember from 'ember';
 import ColumnDefinition from 'ember-cli-ember-table/column-definition';
 import ExcludePagedArray from 'app/mixins/exclude-paged-array';
 import Util from 'ember-cli-pagination/util';
-import AdvancedQuery from 'app/mixins/advanced-query';
+import AdvancedQuery from 'app/utils/advanced-query';
 
 export default
 Ember.Controller.extend(Ember.PromiseProxyMixin,{
@@ -62,10 +62,8 @@ Ember.Controller.extend(Ember.PromiseProxyMixin,{
   paramsForBackend:function(){
     var triggerSource = this.get('triggerSource');
     var params = {
-      filter: {
-        type: 'sysUser',
-        id: triggerSource.get('currentModel.id')
-      }
+      relatedType: 'sysUser',
+      relatedId: triggerSource.get('currentModel.id')
     };
     params.paramMapping={
       perPage: 'limit',

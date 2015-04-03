@@ -4,7 +4,7 @@
 3. Model Config (model-configs)
 4. Model Relation
 5. Common Column (metadata)
-6. Dialogs (Multiple Cascade)
+6. Popups (Multiple Cascade)
 7. Operations
 8. Namespace Route
 9. Locale
@@ -17,6 +17,13 @@
 
 
 ### TODO
-1. backend exclude interface
-2. frontend pagination
-3. how to do advanced query
+1.unified frontend query params
+2.unified backend query params
+3.recheck all query method and refactor !
+4.unified relation between popup with sender
+
+### Grid Header 
+1. Record list  
+2. Relation list
+3. Popup list
+4. how to design model column for diff header and form display

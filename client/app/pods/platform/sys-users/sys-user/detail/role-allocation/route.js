@@ -6,7 +6,7 @@ var collection = RoleMatrix.collection;
 
 var set = Ember.set;
 
-//TODO how to add or replace replace
+//TODO how to add or replace
 export default
 Ember.Route.extend({
   setupController: function (controller, context, transition) {
@@ -15,6 +15,9 @@ Ember.Route.extend({
       this.sort(roles);
       set(controller, 'model', roles);
       set(controller,'header',collection);
+
+      var currentModel = this.modelFor('platform.sysUsers.sysUser');
+      set(controller,'currentModel',currentModel);
     }
   },
   sort: function (roles) {
@@ -57,9 +60,7 @@ Ember.Route.extend({
       if (!roles.contains(role)) {
         roles.pushObject(role);
       }
-      if (!role.get('relationTypes')) {
-        role.set('relationTypes', Ember.A());
-      }
+      role.set('relationTypes', Ember.A());
       /**
        * one role can't be apply for the same slave class:user group position ...
        * TODO check duplicate ?
@@ -72,9 +73,10 @@ Ember.Route.extend({
     return roles;
   },
   model: function () {
+    //TODO findRolesByUser does need other params ?
     var SysRoleRelation = this.store.modelFor('sys-role-relation');
     var controller = this.container.lookup('controller:' + this.routeName);
-      var currentModel = this.modelFor('platform.sysUsers.sysUser');
-      return SysRoleRelation.findRolesByUser(this.store, currentModel.get('id'));
+    var currentModel = this.modelFor('platform.sysUsers.sysUser');
+    return SysRoleRelation.findRolesByUser(this.store, currentModel.get('id'));
   }
 });

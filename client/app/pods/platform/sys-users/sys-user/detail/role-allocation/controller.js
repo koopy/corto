@@ -3,9 +3,10 @@
  */
 import Ember from 'ember';
 import SysRole from 'app/models/sys-role';
+import SenderAction from 'app/mixins/sender-action';
 
 export default
-Ember.ArrayController.extend({
+Ember.ArrayController.extend(SenderAction,{
   modelType:SysRole,
   actions:{
     clearRelationship: function (relation, role) {

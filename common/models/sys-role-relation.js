@@ -68,7 +68,7 @@ module.exports = function (SysRoleRelation) {
     description: 'Find all roles by user id',
     accepts: {arg: 'filter', type: 'object', description: 'Filter defining fields, where, orderBy, offset, and limit'},
     returns: {arg: 'data', type: [typeName], root: true},
-    http: {verb: 'get', path: '/findAllRoles'}
+    http: {verb: 'get', path: '/findRolesByUser'}
   });
 
 

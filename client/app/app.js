@@ -22,12 +22,7 @@ var App = Ember.Application.extend({
 loadInitializers(App, config.modulePrefix);
 
 moment.locale('zh-cn');
-//Ember.onerror = function(){
-//  console.warn('something error');
-//};
-Ember.RSVP.configure('onerror', function(error) {
-console.log('rsvp error');
-});
+
 //Ember.EasyForm.Config.registerWrapper('bootstrap', {
 //  // Define the custom template
 //  inputTemplate: 'bootstrap-input',

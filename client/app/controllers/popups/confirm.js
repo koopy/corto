@@ -1,10 +1,7 @@
 /**
  * Created by weiyang on 15-1-19.
  */
-import
-Ember
-from
-'ember';
+import Ember from 'ember';
 
 var Promise = Ember.RSVP.Promise;
 export default
