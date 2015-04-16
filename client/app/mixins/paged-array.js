@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import AdvancedQuery from 'app/utils/advanced-query';
+import AdvancedQuery from 'corto/utils/advanced-query';
 
 var get = Ember.get;
 

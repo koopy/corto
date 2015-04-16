@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import config from 'app/config/environment';
+import config from 'corto/config/environment';
 import Router from '../router';
-import acls from 'app/acl';
-import resolveWildcard from 'app/utils/resolve-wildcard';
+import aclsConfig from 'corto/acl';
+import resolveWildcard from 'corto/utils/resolve-wildcard';
 
 var appConfig = config.APP;
 function normalizeAcl(acls){
@@ -14,7 +14,7 @@ function normalizeAcl(acls){
     });
   }
 }
-acls = normalizeAcl(acls);
+var acls = normalizeAcl(aclsConfig);
 /**
  * i18n:
  *  cn: use route/template if localePath can't find

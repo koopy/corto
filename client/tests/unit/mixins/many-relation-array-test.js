@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ManyRelationArrayMixin from 'app/mixins/many-relation-array';
+import ManyRelationArrayMixin from 'corto/mixins/many-relation-array';
 
 module('ManyRelationArrayMixin');
 

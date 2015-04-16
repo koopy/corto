@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
-import resolveWildcard from 'app/utils/resolve-wildcard';
+import resolveWildcard from 'corto/utils/resolve-wildcard';
 
 var locales = resolveWildcard('app/locales/*');
 //Ember.MODEL_FACTORY_INJECTIONS = true;

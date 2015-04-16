@@ -2,8 +2,8 @@
  * Created by weiyang on 15-1-13.
  */
 import Ember from 'ember';
-import SysRole from 'app/models/sys-role';
-import SenderAction from 'app/mixins/sender-action';
+import SysRole from 'corto/models/sys-role';
+import SenderAction from 'corto/mixins/sender-action';
 
 export default
 Ember.ArrayController.extend(SenderAction,{

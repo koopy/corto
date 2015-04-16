@@ -2,8 +2,8 @@
  * Created by weiyang on 15-1-13.
  */
 import Ember from 'ember';
-import PagedArray from 'app/mixins/paged-array';
-import SysUser from 'app/models/sys-user';
+import PagedArray from 'corto/mixins/paged-array';
+import SysUser from 'corto/models/sys-user';
 
 export default
 Ember.ArrayController.extend(PagedArray(SysUser),{

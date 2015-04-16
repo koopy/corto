@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import SenderActionMixin from 'app/mixins/sender-action';
+import SenderActionMixin from 'corto/mixins/sender-action';
 
 module('SenderActionMixin');
 

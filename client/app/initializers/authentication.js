@@ -1,4 +1,4 @@
-import lazyMap from 'app/utils/lazy-map';
+import lazyMap from 'corto/utils/lazy-map';
 
 export function initialize(container, application) {
   var session = container.lookup('simple-auth-session:main');

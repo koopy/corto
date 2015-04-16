@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Session from 'simple-auth/session';
-import lazyMap from 'app/utils/lazy-map';
+import lazyMap from 'corto/utils/lazy-map';
 import Configuration from 'simple-auth/configuration';
 
 export function initialize(container, application) {

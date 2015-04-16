@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ColumnDefinition from 'ember-cli-ember-table/column-definition';
 import PagedRemoteArray from 'ember-cli-pagination/remote/paged-remote-array';
 import Util from 'ember-cli-pagination/util';
-import AdvancedQuery from 'app/utils/advanced-query';
+import AdvancedQuery from 'corto/utils/advanced-query';
 
 var a_slice = [].slice,
   get = Ember.get,

@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   var ENV = {
-    modulePrefix: 'app',
+    modulePrefix: 'corto',
     podModulePrefix: 'app/pods',
     environment: environment,
     baseURL: '/',

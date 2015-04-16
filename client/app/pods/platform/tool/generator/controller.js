@@ -3,12 +3,12 @@
  */
 import Ember from 'ember';
 import ColumnDefinition from 'ember-cli-ember-table/column-definition';
-import resolveWildcard from 'app/utils/resolve-wildcard';
+import resolveWildcard from 'corto/utils/resolve-wildcard';
 
 var get = Ember.get;
 var set = Ember.set;
 
-var allModels = resolveWildcard('app/models/*');
+var allModels = resolveWildcard('corto/models/*');
 var names = allModels.names;
 var modules = allModels.modules;
 var normalized={};

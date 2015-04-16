@@ -3,9 +3,9 @@
  */
 import Ember from 'ember';
 import ColumnDefinition from 'ember-cli-ember-table/column-definition';
-import ExcludePagedArray from 'app/mixins/exclude-paged-array';
+import ExcludePagedArray from 'corto/mixins/exclude-paged-array';
 import Util from 'ember-cli-pagination/util';
-import AdvancedQuery from 'app/utils/advanced-query';
+import AdvancedQuery from 'corto/utils/advanced-query';
 
 export default
 Ember.Controller.extend(Ember.PromiseProxyMixin,{

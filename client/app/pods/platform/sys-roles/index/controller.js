@@ -2,8 +2,8 @@
  * Created by weiyang on 15-1-13.
  */
 import Ember from 'ember';
-import PagedArray from 'app/mixins/paged-array';
-import SysRole from 'app/models/sys-role';
+import PagedArray from 'corto/mixins/paged-array';
+import SysRole from 'corto/models/sys-role';
 
 export default
 Ember.ArrayController.extend(PagedArray(SysRole),{
